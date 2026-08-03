@@ -514,7 +514,7 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.55)}
 <script>
 
 // REPLACE with your Render backend URL, e.g. 'https://your-app.onrender.com/api'
-const API_BASE = 'https://golden-touch-backend.onrender.com';
+const API_BASE = 'https://golden-touch-backend.onrender.com/api';
 
 let appts = [], usingApi = false;
 const LS_KEY = 'allure_appts_v3';
@@ -692,7 +692,7 @@ function populateServiceSelect(items) {
 async function loadServices() {
   renderServiceState('fa-solid fa-spinner fa-spin', 'Refreshing services', 'Loading the current Golden Touch service catalog.');
   try {
-    const data = await apiGet('/api/services');
+    const data = await apiGet('/services');
     const items = (Array.isArray(data) ? data : Array.isArray(data?.data) ? data.data : []).filter((item) => isActive(item.active));
     if (!items.length) {
       serviceGroups = [];
@@ -859,7 +859,7 @@ async function submitBooking() {
 async function loadOffers() {
   showOffersState('fa-solid fa-spinner fa-spin', 'Refreshing offers', 'Loading the current Golden Touch offer catalog.');
   try {
-    const data = await apiGet('/api/offers');
+    const data = await apiGet('/offers');
     const items = (Array.isArray(data) ? data : Array.isArray(data?.data) ? data.data : []).filter((item) => isActive(item.active));
     if (!items.length) {
       showOffersState('fa-solid fa-tag', 'No active offers', 'No active offers are available right now.');
