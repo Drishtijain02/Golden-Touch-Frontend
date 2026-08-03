@@ -866,7 +866,7 @@ async function submitBooking() {
 
   } catch (e) {
     console.error(e);
-    alert("Server error. Please try again.");
+    alert(e.message);
     subBtn.disabled = false;
     subBtn.textContent = 'Confirm Booking →';
   }
