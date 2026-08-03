@@ -1,0 +1,2242 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Owner Dashboard | Golden Touch Beauty Salon &amp; Parlour</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --teal: #0b0b0b;
+        --teal-l: #111111;
+        --teal-m: #d4af37;
+        --cream: #f8f5ef;
+        --cream-d: #e8dcc4;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background:
+          radial-gradient(
+            circle at top,
+            rgba(212, 175, 55, 0.06) 0,
+            transparent 38%
+          ),
+          #060a0b;
+        color: var(--cream);
+        min-height: 100vh;
+      }
+      .dashboard-page {
+        width: 100%;
+        max-width: 1840px;
+        margin: 0 auto;
+        padding: clamp(14px, 2vw, 26px);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .dhead {
+        padding: 18px 20px;
+        border: 1px solid rgba(248, 245, 239, 0.08);
+        background: linear-gradient(
+          180deg,
+          rgba(8, 12, 13, 0.96),
+          rgba(3, 9, 10, 0.96)
+        );
+        backdrop-filter: blur(18px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        flex-wrap: wrap;
+        border-radius: 20px;
+        box-shadow: 0 12px 34px rgba(0, 0, 0, 0.25);
+      }
+      .dhtitle {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.25rem, 2vw, 1.65rem);
+        color: var(--cream);
+        line-height: 1.1;
+      }
+      .dhsub {
+        font-size: 0.58rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(248, 245, 239, 0.28);
+        margin-top: 6px;
+      }
+      .dh-r {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .dbadge-w {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: rgba(212, 175, 55, 0.1);
+        border: 1px solid rgba(212, 175, 55, 0.18);
+      }
+      .dbell {
+        font-size: 1rem;
+        color: var(--teal-m);
+      }
+      .dbadge {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background: #e74c3c;
+        color: #fff;
+        font-size: 0.48rem;
+        min-width: 18px;
+        height: 18px;
+        padding: 0 4px;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        display: none;
+      }
+      .dclose {
+        background: rgba(17, 17, 17, 0.36);
+        border: 1px solid rgba(248, 245, 239, 0.09);
+        color: rgba(248, 245, 239, 0.46);
+        font-size: 0.68rem;
+        cursor: pointer;
+        font-family: "Poppins", sans-serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: all 0.25s;
+        padding: 10px 16px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+      }
+      .dclose:hover {
+        color: var(--cream);
+        border-color: rgba(248, 245, 239, 0.22);
+        background: rgba(17, 17, 17, 0.52);
+      }
+      .dbody {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .dstats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        gap: 14px;
+      }
+      .dstat {
+        background: linear-gradient(
+          180deg,
+          rgba(17, 17, 17, 0.54),
+          rgba(11, 11, 11, 0.44)
+        );
+        border: 1px solid rgba(248, 245, 239, 0.07);
+        padding: 18px 18px 16px;
+        border-radius: 18px;
+        min-height: 96px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+      }
+      .dstat-n {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.85rem, 2.8vw, 2.7rem);
+        color: var(--cream);
+        font-style: italic;
+        line-height: 1;
+      }
+      .dstat-l {
+        font-size: 0.56rem;
+        letter-spacing: 2.4px;
+        text-transform: uppercase;
+        color: rgba(248, 245, 239, 0.28);
+        margin-top: 8px;
+      }
+      .dfilter {
+        padding: 16px 18px;
+        border: 1px solid rgba(248, 245, 239, 0.07);
+        background: rgba(17, 17, 17, 0.34);
+        border-radius: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+      }
+      .dfbtn {
+        padding: 9px 14px;
+        background: transparent;
+        border: 1px solid rgba(248, 245, 239, 0.09);
+        color: rgba(248, 245, 239, 0.42);
+        font-family: "Poppins", sans-serif;
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s;
+        border-radius: 999px;
+        white-space: nowrap;
+      }
+      .dfbtn.act {
+        background: var(--teal-m);
+        border-color: var(--teal-m);
+        color: var(--cream);
+        box-shadow: 0 6px 18px rgba(212, 175, 55, 0.12);
+      }
+      .dsearch {
+        flex: 1 1 300px;
+        min-width: 220px;
+        max-width: none;
+        background: rgba(17, 17, 17, 0.48);
+        border: 1px solid rgba(248, 245, 239, 0.08);
+        color: var(--cream);
+        padding: 11px 14px;
+        font-family: "Poppins", sans-serif;
+        font-size: 0.75rem;
+        outline: none;
+        border-radius: 999px;
+        transition: border-color 0.3s;
+      }
+      .dsearch:focus {
+        border-color: rgba(212, 175, 55, 0.26);
+      }
+      .dsearch::placeholder {
+        color: rgba(248, 245, 239, 0.22);
+      }
+      .drefresh {
+        padding: 9px 14px;
+        background: transparent;
+        border: 1px solid rgba(248, 245, 239, 0.09);
+        color: rgba(248, 245, 239, 0.42);
+        font-family: "Poppins", sans-serif;
+        font-size: 0.6rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+      }
+      .drefresh:hover {
+        border-color: rgba(248, 245, 239, 0.22);
+        color: rgba(248, 245, 239, 0.8);
+        background: rgba(17, 17, 17, 0.22);
+      }
+      @keyframes spin {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .spinning {
+        animation: spin 0.8s linear infinite;
+        display: inline-block;
+      }
+      .dtable-shell {
+        border: 1px solid rgba(248, 245, 239, 0.07);
+        background: rgba(17, 17, 17, 0.28);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 12px 34px rgba(0, 0, 0, 0.2);
+      }
+      .dtable-wrap {
+        overflow-x: auto;
+      }
+      .dtable {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 1080px;
+        table-layout: fixed;
+      }
+      .dtable thead {
+        background: rgba(0, 0, 0, 0.24);
+      }
+      .dtable th {
+        padding: 14px 16px;
+        border-bottom: 1px solid rgba(248, 245, 239, 0.05);
+        font-size: 0.56rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(248, 245, 239, 0.28);
+        text-align: left;
+        white-space: nowrap;
+        font-weight: 500;
+      }
+      .dtable td {
+        padding: 15px 16px;
+        border-bottom: 1px solid rgba(248, 245, 239, 0.04);
+        color: rgba(248, 245, 239, 0.68);
+        vertical-align: middle;
+      }
+      .dtable tr:hover td {
+        background: rgba(17, 17, 17, 0.2);
+      }
+      .dtable th:nth-child(1),
+      .dtable td:nth-child(1) {
+        width: 56px;
+        text-align: center;
+      }
+      .dtable th:nth-child(2),
+      .dtable td:nth-child(2) {
+        width: 22%;
+      }
+      .dtable th:nth-child(3),
+      .dtable td:nth-child(3) {
+        width: 14%;
+      }
+      .dtable th:nth-child(4),
+      .dtable td:nth-child(4) {
+        width: 18%;
+      }
+      .dtable th:nth-child(5),
+      .dtable td:nth-child(5) {
+        width: 12%;
+      }
+      .dtable th:nth-child(6),
+      .dtable td:nth-child(6) {
+        width: 10%;
+      }
+      .dtable th:nth-child(7),
+      .dtable td:nth-child(7) {
+        width: 12%;
+      }
+      .dtable th:nth-child(8),
+      .dtable td:nth-child(8) {
+        width: 22%;
+      }
+      .dtable td:nth-child(2) {
+        color: var(--cream);
+        font-weight: 500;
+        white-space: normal;
+        line-height: 1.45;
+        overflow-wrap: anywhere;
+      }
+      .dtable td:nth-child(3),
+      .dtable td:nth-child(5),
+      .dtable td:nth-child(6) {
+        white-space: nowrap;
+      }
+      .sp {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 0.56rem;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .s-pending {
+        background: rgba(212, 175, 55, 0.18);
+        color: var(--teal-m);
+      }
+      .s-confirmed {
+        background: rgba(39, 174, 96, 0.14);
+        color: #27ae60;
+      }
+      .s-completed {
+        background: rgba(248, 245, 239, 0.08);
+        color: rgba(248, 245, 239, 0.42);
+      }
+      .s-cancelled {
+        background: rgba(231, 76, 60, 0.12);
+        color: #e74c3c;
+      }
+      .act-btns {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .act-btn {
+        padding: 8px 11px;
+        font-size: 0.55rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-family: "Poppins", sans-serif;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.2s;
+        white-space: nowrap;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .ab-c {
+        background: rgba(39, 174, 96, 0.14);
+        color: #27ae60;
+        border: 1px solid rgba(39, 174, 96, 0.2);
+      }
+      .ab-c:hover {
+        background: rgba(39, 174, 96, 0.24);
+      }
+      .ab-dn {
+        background: rgba(248, 245, 239, 0.06);
+        color: rgba(248, 245, 239, 0.5);
+        border: 1px solid rgba(248, 245, 239, 0.09);
+      }
+      .ab-dn:hover {
+        background: rgba(248, 245, 239, 0.1);
+      }
+      .ab-d {
+        background: rgba(231, 76, 60, 0.1);
+        color: #e74c3c;
+        border: 1px solid rgba(231, 76, 60, 0.16);
+      }
+      .ab-d:hover {
+        background: rgba(231, 76, 60, 0.2);
+      }
+      .empty-state {
+        text-align: center;
+        padding: 54px 20px;
+        color: rgba(248, 245, 239, 0.22);
+        font-size: 0.82rem;
+      }
+      .ddetail {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100vh;
+        width: min(390px, 100%);
+        background: #040c0d;
+        border-left: 1px solid rgba(248, 245, 239, 0.07);
+        z-index: 2100;
+        transform: translateX(100%);
+        transition: transform 0.35s;
+        overflow-y: auto;
+        padding: clamp(18px, 3vw, 28px) clamp(14px, 3vw, 24px);
+      }
+      .ddetail.open {
+        transform: translateX(0);
+      }
+      .dd-back {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        background: none;
+        border: none;
+        color: rgba(248, 245, 239, 0.32);
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-family: "Poppins", sans-serif;
+        margin-bottom: 18px;
+      }
+      .dd-back:hover {
+        color: var(--cream);
+      }
+      .dd-name {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        color: var(--cream);
+        margin-bottom: 16px;
+        margin-top: 8px;
+      }
+      .dd-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(248, 245, 239, 0.05);
+        font-size: 0.78rem;
+        gap: 12px;
+      }
+      .dd-row:last-child {
+        border-bottom: none;
+      }
+      .dd-key {
+        color: rgba(248, 245, 239, 0.28);
+        font-weight: 300;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .dd-val {
+        color: var(--cream);
+        text-align: right;
+        word-break: break-word;
+      }
+      .dd-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 22px;
+      }
+      .dda {
+        width: 100%;
+        padding: 12px;
+        font-family: "Poppins", sans-serif;
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      .dda-ok {
+        background: rgba(39, 174, 96, 0.16);
+        color: #27ae60;
+        border: 1px solid rgba(39, 174, 96, 0.22);
+      }
+      .dda-ok:hover {
+        background: rgba(39, 174, 96, 0.28);
+      }
+      .dda-wa {
+        background: #25d366;
+        color: #fff;
+      }
+      .dda-wa:hover {
+        background: #1fba5a;
+      }
+      .dda-dn {
+        background: rgba(248, 245, 239, 0.06);
+        color: rgba(248, 245, 239, 0.5);
+        border: 1px solid rgba(248, 245, 239, 0.1);
+      }
+      .dda-del {
+        background: rgba(231, 76, 60, 0.1);
+        color: #e74c3c;
+        border: 1px solid rgba(231, 76, 60, 0.16);
+      }
+      .dda-del:hover {
+        background: rgba(231, 76, 60, 0.2);
+      }
+      .toast {
+        position: fixed;
+        top: 22px;
+        right: 22px;
+        background: #111111;
+        border: 1px solid rgba(248, 245, 239, 0.11);
+        color: var(--cream);
+        padding: 14px 22px;
+        font-size: 0.76rem;
+        z-index: 4000;
+        transform: translateX(130%);
+        transition: transform 0.4s;
+        max-width: 300px;
+        line-height: 1.5;
+        box-shadow: 0 6px 28px rgba(0, 0, 0, 0.4);
+        border-radius: 14px;
+      }
+      .toast.show {
+        transform: translateX(0);
+      }
+      ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(248, 245, 239, 0.1);
+        border-radius: 2px;
+      }
+      @media (max-width: 1024px) {
+        .dtable {
+          min-width: 980px;
+        }
+        .dtable th:nth-child(2),
+        .dtable td:nth-child(2) {
+          width: 24%;
+        }
+      }
+      @media (max-width: 768px) {
+        .dashboard-page {
+          padding: 14px;
+          gap: 14px;
+        }
+        .dhead {
+          padding: 16px;
+        }
+        .dstats {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .dfilter {
+          padding: 14px;
+        }
+        .dsearch {
+          flex-basis: 100%;
+        }
+        .drefresh {
+          width: 100%;
+          justify-content: center;
+        }
+        .act-btns {
+          flex-direction: column;
+          width: 100%;
+        }
+        .act-btn {
+          width: 100%;
+          justify-content: center;
+        }
+        .dtable {
+          min-width: 900px;
+        }
+        .ddetail {
+          width: 100%;
+        }
+      }
+      @media (max-width: 480px) {
+        .dstats {
+          grid-template-columns: 1fr;
+        }
+        .dclose {
+          width: 100%;
+          justify-content: center;
+        }
+        .dbadge-w {
+          width: 100%;
+        }
+        .dh-r {
+          width: 100%;
+        }
+        .dsearch {
+          min-width: 0;
+        }
+        .dtable {
+          min-width: 860px;
+        }
+      }
+
+      .catalog-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .catalog-panel {
+        border: 1px solid rgba(248, 245, 239, 0.07);
+        background: rgba(17, 17, 17, 0.28);
+        border-radius: 20px;
+        box-shadow: 0 12px 34px rgba(0, 0, 0, 0.2);
+        padding: 18px;
+      }
+      .panel-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+      .panel-kicker {
+        font-size: 0.56rem;
+        letter-spacing: 2.4px;
+        text-transform: uppercase;
+        color: rgba(248, 245, 239, 0.28);
+        margin-bottom: 5px;
+      }
+      .panel-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.25rem;
+        color: var(--cream);
+        line-height: 1.15;
+      }
+      .panel-tools {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .entity-toolbar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+      .entity-search,
+      .entity-select {
+        flex: 1 1 220px;
+        min-width: 0;
+        background: rgba(17, 17, 17, 0.48);
+        border: 1px solid rgba(248, 245, 239, 0.08);
+        color: var(--cream);
+        padding: 11px 14px;
+        font-family: "Poppins", sans-serif;
+        font-size: 0.74rem;
+        outline: none;
+        border-radius: 999px;
+        transition: border-color 0.3s;
+      }
+      .entity-search:focus,
+      .entity-select:focus {
+        border-color: rgba(212, 175, 55, 0.26);
+      }
+      .entity-search::placeholder {
+        color: rgba(248, 245, 239, 0.22);
+      }
+      .entity-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .entity-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .entity-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .entity-field label {
+        display: block;
+        font-size: 0.58rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(248, 245, 239, 0.35);
+      }
+      .entity-field input,
+      .entity-field select,
+      .entity-field textarea {
+        width: 100%;
+        background: rgba(17, 17, 17, 0.42);
+        border: 1px solid rgba(248, 245, 239, 0.09);
+        color: var(--cream);
+        padding: 12px 14px;
+        font-family: "Poppins", sans-serif;
+        font-size: 0.8rem;
+        outline: none;
+        transition: border-color 0.3s;
+        border-radius: 14px;
+        font-weight: 300;
+      }
+      .entity-field input:focus,
+      .entity-field select:focus,
+      .entity-field textarea:focus {
+        border-color: rgba(248, 245, 239, 0.26);
+      }
+      .entity-field textarea {
+        min-height: 90px;
+        resize: vertical;
+      }
+      .entity-field textarea::placeholder,
+      .entity-field input::placeholder {
+        color: rgba(248, 245, 239, 0.18);
+      }
+      .check-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.72rem;
+        color: rgba(248, 245, 239, 0.42);
+      }
+      .check-row input {
+        accent-color: var(--teal-m);
+      }
+      .form-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .save-btn {
+        background: var(--cream);
+        color: var(--teal);
+        border: none;
+        padding: 12px 18px;
+        border-radius: 12px;
+        font-family: "Poppins", sans-serif;
+        font-size: 0.66rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        flex: 1 1 160px;
+      }
+      .save-btn:hover {
+        background: var(--cream-d);
+        transform: translateY(-1px);
+      }
+      .save-btn:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        transform: none;
+      }
+      .entity-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .entity-card {
+        border: 1px solid rgba(248, 245, 239, 0.06);
+        background: rgba(17, 17, 17, 0.18);
+        padding: 16px;
+        border-radius: 18px;
+        transition:
+          transform 0.25s,
+          border-color 0.25s;
+      }
+      .entity-card:hover {
+        border-color: rgba(248, 245, 239, 0.14);
+        transform: translateY(-2px);
+      }
+      .entity-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      .entity-name {
+        font-family: "Playfair Display", serif;
+        font-size: 1.06rem;
+        color: var(--cream);
+        line-height: 1.2;
+        margin-bottom: 4px;
+      }
+      .entity-meta,
+      .entity-desc {
+        font-size: 0.74rem;
+        line-height: 1.65;
+        color: rgba(248, 245, 239, 0.42);
+      }
+      .entity-image {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 14px;
+        margin-bottom: 12px;
+        border: 1px solid rgba(248, 245, 239, 0.06);
+        background: #111;
+      }
+      .entity-desc {
+        margin-bottom: 14px;
+      }
+      .entity-empty {
+        text-align: center;
+        padding: 26px 18px;
+        border: 1px dashed rgba(248, 245, 239, 0.08);
+        border-radius: 16px;
+        color: rgba(248, 245, 239, 0.25);
+        font-size: 0.78rem;
+        background: rgba(17, 17, 17, 0.12);
+      }
+      .entity-empty i {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 8px;
+        color: var(--teal-m);
+      }
+      .entity-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .entity-actions .act-btn {
+        flex: 1 1 110px;
+        justify-content: center;
+      }
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 0.56rem;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .status-on {
+        background: rgba(39, 174, 96, 0.14);
+        color: #27ae60;
+      }
+      .status-off {
+        background: rgba(231, 76, 60, 0.12);
+        color: #e74c3c;
+      }
+      @media (max-width: 1024px) {
+        .catalog-grid {
+          grid-template-columns: 1fr;
+        }
+        .entity-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 768px) {
+        .entity-toolbar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .entity-search,
+        .entity-select {
+          width: 100%;
+        }
+        .form-actions {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard-page">
+      <div class="dhead">
+        <div>
+          <div class="dhtitle">Owner Dashboard</div>
+          <div class="dhsub">
+            Golden Touch Beauty Salon &amp; Parlour &middot; Appointment Manager
+          </div>
+        </div>
+        <div class="dh-r">
+          <div class="dbadge-w">
+            <span class="dbell"><i class="fa-solid fa-bell"></i></span
+            ><span class="dbadge" id="dbadge"></span>
+          </div>
+          <button class="dclose" onclick="doLogout()">
+            <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+          </button>
+        </div>
+      </div>
+
+      <div class="dstats">
+        <div class="dstat">
+          <div class="dstat-n" id="ds-total">0</div>
+          <div class="dstat-l">Total</div>
+        </div>
+        <div class="dstat">
+          <div class="dstat-n" id="ds-pending">0</div>
+          <div class="dstat-l">Pending</div>
+        </div>
+        <div class="dstat">
+          <div class="dstat-n" id="ds-confirmed">0</div>
+          <div class="dstat-l">Confirmed</div>
+        </div>
+        <div class="dstat">
+          <div class="dstat-n" id="ds-completed">0</div>
+          <div class="dstat-l">Completed</div>
+        </div>
+        <div class="dstat">
+          <div class="dstat-n" id="ds-cancelled">0</div>
+          <div class="dstat-l">Cancelled</div>
+        </div>
+      </div>
+
+      <div class="dfilter">
+        <button class="dfbtn act" onclick="filterAppts('all', this)">
+          All
+        </button>
+        <button class="dfbtn" onclick="filterAppts('Pending', this)">
+          Pending
+        </button>
+        <button class="dfbtn" onclick="filterAppts('Confirmed', this)">
+          Confirmed
+        </button>
+        <button class="dfbtn" onclick="filterAppts('Completed', this)">
+          Completed
+        </button>
+        <button class="dfbtn" onclick="filterAppts('Cancelled', this)">
+          Cancelled
+        </button>
+        <input
+          class="dsearch"
+          id="dsearch"
+          placeholder="Search name / service..."
+          oninput="renderTable()"
+        />
+        <button class="drefresh" onclick="refreshDash()">
+          <span id="refresh-icon"><i class="fa-solid fa-rotate"></i></span>
+          Refresh
+        </button>
+      </div>
+
+      <div class="dtable-shell">
+        <div class="dtable-wrap">
+          <table class="dtable">
+            <colgroup>
+              <col style="width: 56px" />
+              <col style="width: 22%" />
+              <col style="width: 14%" />
+              <col style="width: 18%" />
+              <col style="width: 12%" />
+              <col style="width: 10%" />
+              <col style="width: 12%" />
+              <col style="width: 22%" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Service</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="dtbody"></tbody>
+          </table>
+        </div>
+        <div class="empty-state" id="dempty" style="display: none">
+          No appointments yet
+        </div>
+      </div>
+
+      <div class="catalog-grid">
+        <section class="catalog-panel">
+          <div class="panel-head">
+            <div>
+              <div class="panel-kicker">Services Management</div>
+              <h3 class="panel-title">Salon Services</h3>
+            </div>
+            <div class="panel-tools">
+              <button
+                class="drefresh"
+                type="button"
+                onclick="refreshCatalog('services', this)"
+              >
+                <span><i class="fa-solid fa-rotate"></i></span> Refresh
+              </button>
+            </div>
+          </div>
+          <div class="entity-toolbar">
+            <input
+              class="entity-search"
+              id="service-search"
+              placeholder="Search services..."
+              oninput="renderServices()"
+            />
+            <select
+              class="entity-select"
+              id="service-category-filter"
+              onchange="renderServices()"
+            ></select>
+          </div>
+          <form
+            class="entity-form"
+            id="service-form"
+            onsubmit="saveService(event)"
+          >
+            <input type="hidden" id="service-id" />
+            <div class="entity-grid">
+              <div class="entity-field">
+                <label>Name</label
+                ><input type="text" id="service-name" placeholder="Haircut" />
+              </div>
+              <div class="entity-field">
+                <label>Category</label
+                ><input type="text" id="service-category" placeholder="Hair" />
+              </div>
+              <div class="entity-field">
+                <label>Price</label
+                ><input type="text" id="service-price" placeholder="499" />
+              </div>
+              <div class="entity-field">
+                <label>Duration</label
+                ><input
+                  type="text"
+                  id="service-duration"
+                  placeholder="45 mins"
+                />
+              </div>
+            </div>
+            <div class="entity-field">
+              <label>Image URL</label
+              ><input
+                type="text"
+                id="service-image"
+                placeholder="https://..."
+              />
+            </div>
+            <div class="entity-field">
+              <label>Description</label
+              ><textarea
+                id="service-description"
+                placeholder="Luxury service description"
+              ></textarea>
+            </div>
+            <label class="check-row"
+              ><input type="checkbox" id="service-active" checked /><span
+                >Active service</span
+              ></label
+            >
+            <div class="form-actions">
+              <button class="save-btn" type="submit" id="service-save">
+                Save Service
+              </button>
+              <button class="dclose" type="button" onclick="resetServiceForm()">
+                Clear
+              </button>
+            </div>
+          </form>
+          <div class="entity-list" id="service-list"></div>
+        </section>
+
+        <section class="catalog-panel">
+          <div class="panel-head">
+            <div>
+              <div class="panel-kicker">Offers Management</div>
+              <h3 class="panel-title">Salon Offers</h3>
+            </div>
+            <div class="panel-tools">
+              <button
+                class="drefresh"
+                type="button"
+                onclick="refreshCatalog('offers', this)"
+              >
+                <span><i class="fa-solid fa-rotate"></i></span> Refresh
+              </button>
+            </div>
+          </div>
+          <form class="entity-form" id="offer-form" onsubmit="saveOffer(event)">
+            <input type="hidden" id="offer-id" />
+            <div class="entity-field">
+              <label>Title</label
+              ><input
+                type="text"
+                id="offer-title"
+                placeholder="Bridal Packages"
+              />
+            </div>
+            <div class="entity-grid">
+              <div class="entity-field">
+                <label>Start Date</label><input type="date" id="offer-start" />
+              </div>
+              <div class="entity-field">
+                <label>End Date</label><input type="date" id="offer-end" />
+              </div>
+            </div>
+            <div class="entity-field">
+              <label>Image URL</label
+              ><input type="text" id="offer-image" placeholder="https://..." />
+            </div>
+            <div class="entity-field">
+              <label>Description</label
+              ><textarea
+                id="offer-description"
+                placeholder="Luxury offer description"
+              ></textarea>
+            </div>
+            <label class="check-row"
+              ><input type="checkbox" id="offer-active" checked /><span
+                >Active offer</span
+              ></label
+            >
+            <div class="form-actions">
+              <button class="save-btn" type="submit" id="offer-save">
+                Save Offer
+              </button>
+              <button class="dclose" type="button" onclick="resetOfferForm()">
+                Clear
+              </button>
+            </div>
+          </form>
+          <div class="entity-list" id="offer-list"></div>
+        </section>
+      </div>
+    </div>
+
+    <div class="ddetail" id="ddetail">
+      <button class="dd-back" onclick="closeDetail()">
+        <i class="fa-solid fa-arrow-left"></i> Back
+      </button>
+      <div id="ddetail-body"></div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+      const STATUS = {
+        PENDING: "Pending",
+        CONFIRMED: "Confirmed",
+        COMPLETED: "Completed",
+        CANCELLED: "Cancelled",
+      };
+      const API_BASE = "http://localhost:5000/api";
+      const SUPABASE_URL = "https://knqjqvgquslhgpprkndo.supabase.co";
+      const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtucWpxdmdxdXNsaGdwcHJrbmRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUyNDIxOTksImV4cCI6MjEwMDgxODE5OX0.S9a9OuRuVK1HIaH1RpM5FZJk24U0G-g2XXzZ8eo5OxQ";
+
+      const realtimeClient = supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY,
+      );
+      const LS_KEY = "allure_appts_v3";
+      let appts = [];
+      let curFilter = "all";
+      let selectedId = null;
+      let usingApi = true;
+      let toastTimer;
+
+      function normalizeStatus(status) {
+        const s = String(status || STATUS.PENDING).toLowerCase();
+        if (s === "confirmed") return STATUS.CONFIRMED;
+        if (s === "completed" || s === "done") return STATUS.COMPLETED;
+        if (s === "cancelled" || s === "canceled") return STATUS.CANCELLED;
+        return STATUS.PENDING;
+      }
+
+      function normalizeAppt(a) {
+        return { ...a, status: normalizeStatus(a.status) };
+      }
+
+      function getApptId(a) {
+        return String(a?.id ?? "");
+      }
+
+      function esc(s) {
+        return String(s ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function fmtDate(d) {
+        if (!d) return "—";
+        try {
+          return new Date(d + "T00:00:00").toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          });
+        } catch (e) {
+          return d;
+        }
+      }
+
+      function fmtTime(t) {
+        if (!t) return "—";
+        try {
+          const parts = String(t).split(":");
+          const hr = Number(parts[0]);
+          const min = parts[1] || "00";
+          return `${hr % 12 || 12}:${min} ${hr < 12 ? "AM" : "PM"}`;
+        } catch (e) {
+          return t;
+        }
+      }
+
+      function getStatusClass(status) {
+        const s = normalizeStatus(status);
+        if (s === STATUS.CONFIRMED) return "s-confirmed";
+        if (s === STATUS.COMPLETED) return "s-completed";
+        if (s === STATUS.CANCELLED) return "s-cancelled";
+        return "s-pending";
+      }
+
+      function showToast(msg, bg) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.style.background = bg || "#111111";
+        t.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => t.classList.remove("show"), 3200);
+      }
+
+      async function apiGet(path) {
+        const res = await fetch(API_BASE + path);
+        if (!res.ok) throw new Error("Request failed");
+        return res.json();
+      }
+
+      async function apiPatch(path, payload) {
+        const res = await fetch(API_BASE + path, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error("Request failed");
+        return res.json();
+      }
+
+      async function apiDelete(path) {
+        const res = await fetch(API_BASE + path, { method: "DELETE" });
+        if (!res.ok) throw new Error("Request failed");
+        return res.json();
+      }
+
+      async function checkApi() {
+        try {
+          const res = await fetch(API_BASE + "/health");
+          usingApi = res.ok;
+        } catch (e) {
+          usingApi = false;
+        }
+      }
+
+      function lsLoad() {
+        try {
+          return JSON.parse(localStorage.getItem(LS_KEY) || "[]");
+        } catch (e) {
+          return [];
+        }
+      }
+
+      function lsSave() {
+        localStorage.setItem(LS_KEY, JSON.stringify(appts));
+      }
+
+      async function loadAppts() {
+        try {
+          if (usingApi) {
+            const data = await apiGet("/appointments");
+            appts = Array.isArray(data) ? data.map(normalizeAppt) : [];
+            lsSave();
+            return;
+          }
+        } catch (e) {
+          usingApi = false;
+        }
+        appts = lsLoad().map(normalizeAppt);
+      }
+
+      function renderStats() {
+        const counts = {
+          total: appts.length,
+          pending: appts.filter(
+            (a) => normalizeStatus(a.status) === STATUS.PENDING,
+          ).length,
+          confirmed: appts.filter(
+            (a) => normalizeStatus(a.status) === STATUS.CONFIRMED,
+          ).length,
+          completed: appts.filter(
+            (a) => normalizeStatus(a.status) === STATUS.COMPLETED,
+          ).length,
+          cancelled: appts.filter(
+            (a) => normalizeStatus(a.status) === STATUS.CANCELLED,
+          ).length,
+        };
+        document.getElementById("ds-total").textContent = counts.total;
+        document.getElementById("ds-pending").textContent = counts.pending;
+        document.getElementById("ds-confirmed").textContent = counts.confirmed;
+        document.getElementById("ds-completed").textContent = counts.completed;
+        document.getElementById("ds-cancelled").textContent = counts.cancelled;
+      }
+
+      function updateBadge() {
+        const pending = appts.filter(
+          (a) => normalizeStatus(a.status) === STATUS.PENDING,
+        ).length;
+        const badge = document.getElementById("dbadge");
+        badge.textContent = pending;
+        badge.style.display = pending ? "flex" : "none";
+      }
+
+      function filterAppts(filter, btn) {
+        curFilter = filter;
+        document
+          .querySelectorAll(".dfbtn")
+          .forEach((b) => b.classList.remove("act"));
+        if (btn) btn.classList.add("act");
+        renderTable();
+      }
+
+      function renderTable() {
+        const q = (
+          document.getElementById("dsearch").value || ""
+        ).toLowerCase();
+        const tbody = document.getElementById("dtbody");
+        const empty = document.getElementById("dempty");
+        const rows = appts.filter((a) => {
+          const status = normalizeStatus(a.status);
+          const matchesFilter = curFilter === "all" || status === curFilter;
+          const matchesQuery =
+            !q ||
+            String(a.name || "")
+              .toLowerCase()
+              .includes(q) ||
+            String(a.service || "")
+              .toLowerCase()
+              .includes(q) ||
+            String(a.phone || "").includes(q);
+          return matchesFilter && matchesQuery;
+        });
+
+        if (!rows.length) {
+          tbody.innerHTML = "";
+          empty.style.display = "block";
+          return;
+        }
+
+        empty.style.display = "none";
+        tbody.innerHTML = rows
+          .map((a, index) => {
+            const status = normalizeStatus(a.status);
+            const apptId = getApptId(a);
+            const idSafe = `'${String(apptId).replace(/'/g, "\\'")}'`;
+            const canConfirm = status === STATUS.PENDING;
+            const canComplete =
+              status !== STATUS.COMPLETED && status !== STATUS.CANCELLED;
+            return `<tr class="dbrow" onclick="openDetail(${idSafe})">
+      <td style="color:rgba(248,245,239,.25);font-size:.68rem">${index + 1}</td>
+      <td>${esc(a.name || "—")}</td>
+      <td><a href="tel:${esc(a.phone || "")}" onclick="event.stopPropagation()" style="color:inherit;text-decoration:none">${esc(a.phone || "—")}</a></td>
+      <td style="font-size:.72rem">${esc(a.service || "—")}</td>
+      <td style="font-size:.72rem;white-space:nowrap">${fmtDate(a.date)}</td>
+      <td style="font-size:.72rem;white-space:nowrap">${fmtTime(a.time)}</td>
+      <td><span class="sp ${getStatusClass(status)}">${status}</span></td>
+      <td onclick="event.stopPropagation()">
+        <div class="act-btns">
+          ${canConfirm ? `<button class="act-btn ab-c" onclick="confirmAppt(${idSafe})"><i class="fa-brands fa-whatsapp"></i> Confirm + WA</button>` : ""}
+          ${canComplete ? `<button class="act-btn ab-dn" onclick="updateStatus(${idSafe}, 'Completed')"><i class="fa-regular fa-circle-check"></i> Complete</button>` : ""}
+          <button class="act-btn ab-d" onclick="deleteAppt(${idSafe})"><i class="fa-solid fa-trash"></i> Delete</button>
+        </div>
+      </td>
+    </tr>`;
+          })
+          .join("");
+      }
+
+      function getAppt(id) {
+        return appts.find((a) => getApptId(a) === String(id));
+      }
+
+      async function refreshDash() {
+        const icon = document.getElementById("refresh-icon");
+        icon.classList.add("spinning");
+        try {
+          await loadAppts();
+          renderStats();
+          renderTable();
+          updateBadge();
+        } catch (e) {
+          showToast("Failed to load appointments");
+        } finally {
+          icon.classList.remove("spinning");
+        }
+      }
+
+      async function confirmAppt(id) {
+        const a = getAppt(id);
+        if (!a) return;
+
+        const phone = String(a.phone || "").replace(/\D/g, "");
+
+        if (phone.length < 10) {
+          showToast("Invalid phone number.");
+          return;
+        }
+
+        const txt = `Hi ${a.name || ""}!
+
+Your appointment at Golden Touch Beauty Salon & Parlour has been confirmed.
+
+Service: ${a.service || "—"}
+Date: ${fmtDate(a.date)}
+Time: ${fmtTime(a.time)}
+
+We look forward to seeing you.
+
+Golden Touch Beauty Salon & Parlour`;
+
+        const waUrl = `https://wa.me/${phone.startsWith("91") ? phone : "91" + phone}?text=${encodeURIComponent(txt)}`;
+
+        // Open WhatsApp immediately (browser won't block it)
+        window.open(waUrl, "_blank");
+
+        // Then update the appointment
+        await updateStatus(id, STATUS.CONFIRMED);
+
+        showToast(`Confirmed and WhatsApp opened for ${a.name || "client"}`);
+      }
+      async function updateStatus(id, status) {
+        const a = getAppt(id);
+
+        if (!a) return;
+
+        const prev = a.status;
+        a.status = status;
+
+        try {
+          if (usingApi) {
+            await apiPatch(`/appointments/${id}`, {
+              status,
+            });
+          } else {
+            lsSave();
+          }
+
+          renderStats();
+          renderTable();
+          updateBadge();
+
+          if (selectedId === id) {
+            openDetail(id);
+          }
+
+          showToast(`${a.name || "Appointment"} marked as ${status}`);
+        } catch (e) {
+          a.status = prev;
+
+          renderTable();
+
+          showToast("Could not update.");
+        }
+      }
+      async function deleteAppt(id) {
+        if (!confirm("Delete this appointment?")) return;
+        const prev = [...appts];
+        appts = appts.filter((a) => getApptId(a) !== String(id));
+        try {
+          if (usingApi) {
+            await apiDelete(`/appointments/${id}`);
+          } else {
+            lsSave();
+          }
+          renderStats();
+          renderTable();
+          updateBadge();
+          if (selectedId === id) closeDetail();
+          showToast("Deleted.");
+        } catch (e) {
+          appts = prev;
+          renderTable();
+          showToast("Could not delete.");
+        }
+      }
+
+      function openDetail(id) {
+        selectedId = id;
+        const a = getAppt(id);
+        if (!a) return;
+        const status = normalizeStatus(a.status);
+        const phone = String(a.phone || "").replace(/\D/g, "");
+        const apptId = getApptId(a);
+        const received = a.createdAt || a.created || a.timestamp;
+        const receivedText = received
+          ? new Date(received).toLocaleString("en-IN", {
+              day: "2-digit",
+              month: "short",
+              hour: "2-digit",
+              minute: "2-digit",
+            })
+          : "—";
+        const canConfirm = status === STATUS.PENDING;
+        const canComplete =
+          status !== STATUS.COMPLETED && status !== STATUS.CANCELLED;
+        const waMsg = encodeURIComponent(
+          "Hi " +
+            (a.name || "there") +
+            ", regarding your appointment at Golden Touch Beauty Salon &amp; Parlour.",
+        );
+        const waUrl =
+          "https://wa.me/" +
+          (phone.startsWith("91") ? phone : "91" + phone) +
+          "?text=" +
+          waMsg;
+
+        document.getElementById("ddetail-body").innerHTML = `
+    <span class="sp ${getStatusClass(status)}" style="margin-bottom:10px;display:inline-flex">${status}</span>
+    <div class="dd-name">${esc(a.name || "Appointment")}</div>
+    <div class="dd-row"><span class="dd-key">Phone</span><span class="dd-val"><a href="tel:${esc(a.phone || "")}" style="color:var(--cream);text-decoration:none">${esc(a.phone || "—")}</a></span></div>
+    <div class="dd-row"><span class="dd-key">Service</span><span class="dd-val">${esc(a.service || "—")}</span></div>
+    <div class="dd-row"><span class="dd-key">Date</span><span class="dd-val">${fmtDate(a.date)}</span></div>
+    <div class="dd-row"><span class="dd-key">Time</span><span class="dd-val">${fmtTime(a.time)}</span></div>
+    <div class="dd-row"><span class="dd-key">Note</span><span class="dd-val">${esc(a.msg || "—")}</span></div>
+    <div class="dd-row"><span class="dd-key">ID</span><span class="dd-val" style="font-size:.6rem;opacity:.35">${esc(apptId)}</span></div>
+    <div class="dd-row"><span class="dd-key">Received</span><span class="dd-val" style="font-size:.67rem">${receivedText}</span></div>
+    <div class="dd-actions">
+      ${canConfirm ? `<button class="dda dda-ok" onclick="confirmAppt(${JSON.stringify(String(id))})"><i class="fa-brands fa-whatsapp"></i> Confirm &amp; Send WhatsApp</button>` : ""}
+      ${canComplete ? `<button class="dda dda-dn" onclick="updateStatus(${JSON.stringify(String(id))}, 'Completed')"><i class="fa-regular fa-circle-check"></i> Mark as Completed</button>` : ""}
+      <button class="dda dda-wa" onclick="window.open(${JSON.stringify(waUrl)}, '_blank')"><i class="fa-brands fa-whatsapp"></i> Message Client</button>
+      <button class="dda dda-del" onclick="deleteAppt(${JSON.stringify(String(id))})"><i class="fa-solid fa-trash"></i> Delete</button>
+    </div>`;
+        document.getElementById("ddetail").classList.add("open");
+      }
+
+      function closeDetail() {
+        document.getElementById("ddetail").classList.remove("open");
+        selectedId = null;
+      }
+
+      const catalogState = {
+        services: [],
+        serviceLoading: false,
+        serviceEditingId: null,
+        offers: [],
+        offerLoading: false,
+        offerEditingId: null,
+      };
+
+      function apiJson(path, method, payload) {
+        return fetch(API_BASE + path, {
+          method,
+          headers: { "Content-Type": "application/json" },
+          body: payload === undefined ? undefined : JSON.stringify(payload),
+        }).then(async (res) => {
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) {
+            throw new Error(data.error || "Request failed");
+          }
+          return data;
+        });
+      }
+
+      function normalizeCatalogItems(payload) {
+        return Array.isArray(payload)
+          ? payload
+          : Array.isArray(payload?.data)
+            ? payload.data
+            : [];
+      }
+
+      function toId(item) {
+        return String(item?.id ?? item?._id ?? item?.dbId ?? "");
+      }
+
+      function isActiveValue(value) {
+        if (value === true || value === 1 || value === "1") return true;
+        if (typeof value === "string") return value.toLowerCase() === "true";
+        return false;
+      }
+
+      function boolLabel(value) {
+        return isActiveValue(value) ? "Active" : "Inactive";
+      }
+
+      function safeText(value) {
+        return String(value ?? "").trim();
+      }
+
+      function moneyLabel(value) {
+        const raw = safeText(value);
+        if (!raw) return "?";
+        return raw.startsWith("?") ? raw : `?${raw}`;
+      }
+
+      function formatCatalogDate(value) {
+        if (!value) return "?";
+        try {
+          return new Date(value).toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          });
+        } catch (e) {
+          return value;
+        }
+      }
+
+      function serviceCategories(items) {
+        const cats = [
+          ...new Set(
+            items.map((item) => safeText(item.category)).filter(Boolean),
+          ),
+        ].sort((a, b) => a.localeCompare(b));
+        const select = document.getElementById("service-category-filter");
+        if (!select) return;
+        const current = select.value || "all";
+        select.innerHTML = ['<option value="all">All Categories</option>']
+          .concat(
+            cats.map(
+              (cat) => `<option value="${esc(cat)}">${esc(cat)}</option>`,
+            ),
+          )
+          .join("");
+        if ([...select.options].some((opt) => opt.value === current))
+          select.value = current;
+      }
+
+      function serviceMatchesFilters(item) {
+        const q = safeText(
+          document.getElementById("service-search")?.value,
+        ).toLowerCase();
+        const cat =
+          document.getElementById("service-category-filter")?.value || "all";
+        const itemCat = safeText(item.category);
+        const hay =
+          `${safeText(item.name)} ${itemCat} ${safeText(item.description)} ${safeText(item.price)} ${safeText(item.duration)}`.toLowerCase();
+        const matchesSearch = !q || hay.includes(q);
+        const matchesCat = cat === "all" || itemCat === cat;
+        return matchesSearch && matchesCat;
+      }
+
+      function setEntityState(listId, icon, title, text) {
+        const el = document.getElementById(listId);
+        if (!el) return;
+        el.innerHTML = `<div class="entity-empty"><i class="${icon}"></i><div>${esc(title)}</div><div style="margin-top:6px">${esc(text)}</div></div>`;
+      }
+
+      function resetServiceForm() {
+        catalogState.serviceEditingId = null;
+        document.getElementById("service-form").reset();
+        document.getElementById("service-active").checked = true;
+        document.getElementById("service-save").textContent = "Save Service";
+      }
+
+      function resetOfferForm() {
+        catalogState.offerEditingId = null;
+        document.getElementById("offer-form").reset();
+        document.getElementById("offer-active").checked = true;
+        document.getElementById("offer-save").textContent = "Save Offer";
+      }
+
+      function renderServices() {
+  const list = document.getElementById("service-list");
+  if (!list) return;
+
+  const items = catalogState.services.filter(serviceMatchesFilters);
+
+  if (!items.length) {
+    setEntityState(
+      "service-list",
+      "fa-solid fa-scissors",
+      "No services found",
+      catalogState.serviceLoading
+        ? "Loading services..."
+        : "Try a different search or category."
+    );
+    return;
+  }
+
+  list.innerHTML = items
+    .map((item) => {
+      const id = toId(item);
+      const active = isActiveValue(item.active);
+      const image = safeText(item.image_url);
+
+      return `
+      <div class="entity-card">
+
+        <div class="entity-top">
+          <div>
+            <div class="entity-name">${esc(item.name || "Service")}</div>
+            <div class="entity-meta">
+              ${esc(
+                [
+                  item.category,
+                  moneyLabel(item.price),
+                  item.duration
+                    ? item.duration + " min"
+                    : ""
+                ]
+                  .filter(Boolean)
+                  .join(" • ")
+              )}
+            </div>
+          </div>
+
+          <span class="status-pill ${active ? "status-on" : "status-off"}">
+            ${boolLabel(active)}
+          </span>
+        </div>
+
+        ${
+          image
+            ? `<img class="entity-image"
+                   src="${esc(image)}"
+                   alt="${esc(item.name || "Service")}"
+                   onerror="this.style.display='none'"/>`
+            : ""
+        }
+
+        <div class="entity-desc">
+          ${esc(item.description || "No description provided.")}
+        </div>
+
+        <div class="entity-actions">
+
+          <button
+            class="act-btn ab-c"
+            type="button"
+            onclick="editService('${id}')">
+            <i class="fa-solid fa-pen-to-square"></i>
+            Edit
+          </button>
+
+          <button
+            class="act-btn ${active ? "ab-dn" : "ab-c"}"
+            type="button"
+            onclick="toggleService('${id}', ${!active})">
+            <i class="fa-solid fa-power-off"></i>
+            ${active ? "Deactivate" : "Activate"}
+          </button>
+
+          <button
+            class="act-btn ab-d"
+            type="button"
+            onclick="deleteService('${id}')">
+            <i class="fa-solid fa-trash"></i>
+            Delete
+          </button>
+
+        </div>
+
+      </div>`;
+    })
+    .join("");
+}
+      function renderOffers() {
+  const list = document.getElementById("offer-list");
+  if (!list) return;
+
+  const items = catalogState.offers;
+
+  if (!items.length) {
+    setEntityState(
+      "offer-list",
+      "fa-solid fa-tags",
+      "No offers found",
+      catalogState.offerLoading
+        ? "Loading offers..."
+        : "Create your first offer below."
+    );
+    return;
+  }
+
+  list.innerHTML = items
+    .map((item) => {
+      const id = toId(item);
+      const active = isActiveValue(item.active);
+      const image = safeText(item.image_url);
+
+      const validity = [
+        formatCatalogDate(item.start_date),
+        formatCatalogDate(item.end_date),
+      ]
+        .filter((v) => v !== "?")
+        .join(" - ");
+
+      return `
+      <div class="entity-card">
+
+        <div class="entity-top">
+          <div>
+            <div class="entity-name">${esc(item.title || "Offer")}</div>
+            <div class="entity-meta">${esc(validity || "-")}</div>
+          </div>
+
+          <span class="status-pill ${active ? "status-on" : "status-off"}">
+            ${boolLabel(active)}
+          </span>
+        </div>
+
+        ${
+          image
+            ? `<img class="entity-image"
+                   src="${esc(image)}"
+                   alt="${esc(item.title || "Offer")}"
+                   onerror="this.style.display='none'"/>`
+            : ""
+        }
+
+        <div class="entity-desc">
+          ${esc(item.description || "No description provided.")}
+        </div>
+
+        <div class="entity-actions">
+
+          <button
+            class="act-btn ab-c"
+            type="button"
+            onclick="editOffer('${id}')">
+            <i class="fa-solid fa-pen-to-square"></i>
+            Edit
+          </button>
+
+          <button
+            class="act-btn ${active ? "ab-dn" : "ab-c"}"
+            type="button"
+            onclick="toggleOffer('${id}', ${!active})">
+            <i class="fa-solid fa-power-off"></i>
+            ${active ? "Deactivate" : "Activate"}
+          </button>
+
+          <button
+            class="act-btn ab-d"
+            type="button"
+            onclick="deleteOffer('${id}')">
+            <i class="fa-solid fa-trash"></i>
+            Delete
+          </button>
+
+        </div>
+
+      </div>`;
+    })
+    .join("");
+}
+
+      async function loadServicesCatalog(silent) {
+        catalogState.serviceLoading = true;
+        if (!silent)
+          setEntityState(
+            "service-list",
+            "fa-solid fa-spinner fa-spin",
+            "Loading services",
+            "Fetching services from the server...",
+          );
+        try {
+          const data = await apiGet("/services");
+          catalogState.services = normalizeCatalogItems(data);
+          serviceCategories(catalogState.services);
+          renderServices();
+        } catch (e) {
+          console.error(e);
+          setEntityState(
+            "service-list",
+            "fa-solid fa-triangle-exclamation",
+            "Unable to load services",
+            "Please try again.",
+          );
+          showToast(e.message || "Could not load services.");
+        } finally {
+          catalogState.serviceLoading = false;
+        }
+      }
+
+      async function loadOffersCatalog(silent) {
+        catalogState.offerLoading = true;
+        if (!silent)
+          setEntityState(
+            "offer-list",
+            "fa-solid fa-spinner fa-spin",
+            "Loading offers",
+            "Fetching offers from the server...",
+          );
+        try {
+          const data = await apiGet("/offers");
+          catalogState.offers = normalizeCatalogItems(data);
+          renderOffers();
+        } catch (e) {
+          console.error(e);
+          setEntityState(
+            "offer-list",
+            "fa-solid fa-triangle-exclamation",
+            "Unable to load offers",
+            "Please try again.",
+          );
+          showToast(e.message || "Could not load offers.");
+        } finally {
+          catalogState.offerLoading = false;
+        }
+      }
+
+      async function refreshCatalog(kind, button) {
+        const icon = button?.querySelector("i");
+        if (icon) icon.classList.add("spinning");
+        try {
+          if (kind === "services") {
+            await loadServicesCatalog(true);
+            renderServices();
+            showToast("Services refreshed.");
+          } else {
+            await loadOffersCatalog(true);
+            renderOffers();
+            showToast("Offers refreshed.");
+          }
+        } catch (e) {
+          showToast("Could not refresh.");
+        } finally {
+          if (icon) icon.classList.remove("spinning");
+        }
+      }
+
+      function editService(id) {
+        alert("Edit clicked: " + id);
+        const item = catalogState.services.find(
+          (row) => toId(row) === String(id),
+        );
+        if (!item) return;
+        catalogState.serviceEditingId = String(id);
+        document.getElementById("service-id").value = String(id);
+        document.getElementById("service-name").value = safeText(item.name);
+        document.getElementById("service-category").value = safeText(
+          item.category,
+        );
+        document.getElementById("service-price").value = safeText(item.price);
+        document.getElementById("service-duration").value = safeText(
+          item.duration,
+        );
+        document.getElementById("service-image").value = safeText(
+          item.image_url,
+        );
+        document.getElementById("service-description").value = safeText(
+          item.description,
+        );
+        document.getElementById("service-active").checked = isActiveValue(
+          item.active,
+        );
+        document.getElementById("service-save").textContent = "Update Service";
+      }
+
+      function editOffer(id) {
+        const item = catalogState.offers.find(
+          (row) => toId(row) === String(id),
+        );
+        if (!item) return;
+        catalogState.offerEditingId = String(id);
+        document.getElementById("offer-id").value = String(id);
+        document.getElementById("offer-title").value = safeText(item.title);
+        document.getElementById("offer-description").value = safeText(
+          item.description,
+        );
+        document.getElementById("offer-image").value = safeText(item.image_url);
+        document.getElementById("offer-start").value = safeText(
+          item.start_date,
+        );
+        document.getElementById("offer-end").value = safeText(item.end_date);
+        document.getElementById("offer-active").checked = isActiveValue(
+          item.active,
+        );
+        document.getElementById("offer-save").textContent = "Update Offer";
+      }
+
+      async function saveService(event) {
+        event.preventDefault();
+        const payload = {
+          name: safeText(document.getElementById("service-name").value),
+          category: safeText(document.getElementById("service-category").value),
+          price: safeText(document.getElementById("service-price").value),
+          duration: safeText(document.getElementById("service-duration").value),
+          description: safeText(
+            document.getElementById("service-description").value,
+          ),
+          image_url: safeText(document.getElementById("service-image").value),
+          active: document.getElementById("service-active").checked,
+        };
+        if (!payload.name) return showToast("Service name is required.");
+        const btn = document.getElementById("service-save");
+        btn.disabled = true;
+        try {
+          if (catalogState.serviceEditingId) {
+            await apiJson(
+              `/services/${catalogState.serviceEditingId}`,
+              "PUT",
+              payload,
+            );
+            showToast("Service updated.");
+          } else {
+            await apiJson("/services", "POST", payload);
+            showToast("Service added.");
+          }
+          resetServiceForm();
+          await loadServicesCatalog(true);
+          renderServices();
+        } catch (e) {
+          console.error(e);
+          showToast(e.message || "Could not save service.");
+        } finally {
+          btn.disabled = false;
+        }
+      }
+
+      async function saveOffer(event) {
+        event.preventDefault();
+        const payload = {
+          title: safeText(document.getElementById("offer-title").value),
+          description: safeText(
+            document.getElementById("offer-description").value,
+          ),
+          image_url: safeText(document.getElementById("offer-image").value),
+          start_date: safeText(document.getElementById("offer-start").value),
+          end_date: safeText(document.getElementById("offer-end").value),
+          active: document.getElementById("offer-active").checked,
+        };
+        if (!payload.title) return showToast("Offer title is required.");
+        const btn = document.getElementById("offer-save");
+        btn.disabled = true;
+        try {
+          if (catalogState.offerEditingId) {
+            await apiJson(
+              `/offers/${catalogState.offerEditingId}`,
+              "PUT",
+              payload,
+            );
+            showToast("Offer updated.");
+          } else {
+            await apiJson("/offers", "POST", payload);
+            showToast("Offer added.");
+          }
+          resetOfferForm();
+          await loadOffersCatalog(true);
+          renderOffers();
+        } catch (e) {
+          console.error(e);
+          showToast(e.message || "Could not save offer.");
+        } finally {
+          btn.disabled = false;
+        }
+      }
+
+      async function toggleService(id, active) {
+        try {
+          await apiJson(`/services/${id}`, "PUT", { active });
+          showToast(`Service ${active ? "activated" : "deactivated"}.`);
+          await loadServicesCatalog(true);
+          renderServices();
+        } catch (e) {
+          console.error(e);
+          showToast(e.message || "Could not update service.");
+        }
+      }
+
+      async function toggleOffer(id, active) {
+        try {
+          await apiJson(`/offers/${id}`, "PUT", { active });
+          showToast(`Offer ${active ? "activated" : "deactivated"}.`);
+          await loadOffersCatalog(true);
+          renderOffers();
+        } catch (e) {
+          console.error(e);
+          showToast(e.message || "Could not update offer.");
+        }
+      }
+
+      async function deleteService(id) {
+        alert("Delete clicked: " + id);
+        if (!confirm("Delete this service?")) return;
+        try {
+          await apiDelete(`/services/${id}`);
+          if (catalogState.serviceEditingId === String(id)) resetServiceForm();
+          showToast("Service deleted.");
+          await loadServicesCatalog(true);
+          renderServices();
+        } catch (e) {
+          console.error(e);
+          showToast(e.message || "Could not delete service.");
+        }
+      }
+
+      async function deleteOffer(id) {
+        if (!confirm("Delete this offer?")) return;
+        try {
+          await apiDelete(`/offers/${id}`);
+          if (catalogState.offerEditingId === String(id)) resetOfferForm();
+          showToast("Offer deleted.");
+          await loadOffersCatalog(true);
+          renderOffers();
+        } catch (e) {
+          console.error(e);
+          showToast(e.message || "Could not delete offer.");
+        }
+      }
+
+      function doLogout() {
+        // Remove all login information
+        localStorage.removeItem("ownerAuth");
+        localStorage.removeItem("ownerName");
+        localStorage.removeItem("ownerEmail");
+
+        // Prevent browser back button showing cached dashboard
+        window.location.replace("owner.html");
+      }
+      function showPendingNotifications() {
+        filterAppts("Pending");
+
+        const pending = appts.filter(
+          (a) => normalizeStatus(a.status) === STATUS.PENDING,
+        ).length;
+
+        showToast(`${pending} pending appointment${pending !== 1 ? "s" : ""}`);
+      }
+
+      (async function init() {
+        const isAuth = localStorage.getItem("ownerAuth");
+        if (!isAuth || isAuth !== "true") {
+          window.location.href = "owner.html";
+          return;
+        }
+        await checkApi();
+        await loadAppts();
+        renderStats();
+        renderTable();
+        updateBadge();
+        await loadServicesCatalog();
+        await loadOffersCatalog();
+        renderServices();
+        renderOffers();
+        document
+          .getElementById("dsearch")
+          .addEventListener("input", renderTable);
+        document
+          .getElementById("service-search")
+          .addEventListener("input", renderServices);
+        document
+          .getElementById("service-category-filter")
+          .addEventListener("change", renderServices);
+        document
+          .getElementById("service-form")
+          .addEventListener("reset", resetServiceForm);
+        document
+          .getElementById("offer-form")
+          .addEventListener("reset", resetOfferForm);
+        realtimeClient
+          .channel("appointments-channel")
+          .on(
+            "postgres_changes",
+            {
+              event: "*",
+              schema: "public",
+              table: "appointments",
+            },
+            async (payload) => {
+              console.log("Realtime:", payload);
+
+              await loadAppts();
+
+              renderStats();
+              renderTable();
+              updateBadge();
+
+              if (payload.eventType === "INSERT") {
+                showToast(
+                  `?? New appointment from ${payload.new.customer_name}`,
+                );
+              }
+            },
+          )
+          .subscribe((status) => {
+            console.log("Realtime Status:", status);
+          });
+      })();
+      window.history.pushState(null, "", window.location.href);
+
+      window.onpopstate = function () {
+        window.history.pushState(null, "", window.location.href);
+      };
+    </script>
+  </body>
+</html>
