@@ -102,94 +102,129 @@ section{padding:clamp(60px,8vw,100px) 5%}
 .odesc{font-size:.73rem;color:rgba(248,245,239,.36);line-height:1.7;font-weight:300}
 .gallery-section {
     background: #080807;
-    padding: 100px 6%;
+    padding: 110px 6%;
 }
 
 .gallery-heading {
     text-align: center;
     max-width: 700px;
-    margin: 0 auto 60px;
+    margin: 0 auto 55px;
+}
+
+.gallery-heading .stag {
+    display: block;
+    color: #b79a63;
+    font-size: 0.7rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
 }
 
 .gallery-heading h2 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 500;
     color: #f8f5ef;
-    margin: 15px 0;
+    margin: 0 0 15px;
 }
 
 .gallery-heading p {
     color: #8d8a83;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
 }
 
+
+/* =========================
+   GALLERY GRID
+   ========================= */
+
 .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 280px;
-    gap: 14px;
-    max-width: 1400px;
+    width: 100%;
+    max-width: 1350px;
     margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
 }
+
+
+/* Every image has exactly the same tile size */
 
 .gallery-item {
     position: relative;
     overflow: hidden;
-    min-width: 0;
-    min-height: 0;
+    background: #111;
+    aspect-ratio: 4 / 3;
 }
+
+
+/* Image */
 
 .gallery-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
     display: block;
-    transition: transform 0.6s ease;
+    object-fit: cover;
+    object-position: center;
+
+    transition: transform 0.7s ease;
 }
+
+
+/* Subtle zoom */
 
 .gallery-item:hover img {
-    transform: scale(1.04);
+    transform: scale(1.05);
 }
 
-/* Control which images are larger */
-.gallery-item.large {
-    grid-column: span 2;
-}
 
-.gallery-item.tall {
-    grid-row: span 2;
-}
-    .gallery-item {
-    border-radius: 2px;
-}
+/* Dark gradient */
 
 .gallery-item::after {
     content: "";
     position: absolute;
     inset: 0;
+
     background: linear-gradient(
         to top,
-        rgba(0,0,0,.65),
-        transparent 45%
+        rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0.05) 55%,
+        transparent
     );
+
     opacity: 0;
-    transition: opacity .35s ease;
+    transition: opacity 0.35s ease;
+
+    pointer-events: none;
+}
+
+
+/* Overlay */
+
+.gallery-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    padding: 24px;
+
+    color: #f8f5ef;
+
+    opacity: 0;
+    transform: translateY(10px);
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+
+    z-index: 2;
 }
 
 .gallery-item:hover::after {
     opacity: 1;
-}
-
-.gallery-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 20px;
-    z-index: 2;
-    color: #f8f5ef;
-    transform: translateY(10px);
-    opacity: 0;
-    transition: .35s ease;
 }
 
 .gallery-item:hover .gallery-overlay {
@@ -200,6 +235,48 @@ section{padding:clamp(60px,8vw,100px) 5%}
 .gallery-overlay span {
     font-family: 'Playfair Display', serif;
     font-size: 1.15rem;
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 900px) {
+
+    .gallery-section {
+        padding: 80px 5%;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .gallery-section {
+        padding: 70px 20px;
+    }
+
+    .gallery-heading {
+        margin-bottom: 40px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .gallery-item {
+        aspect-ratio: 4 / 3;
+    }
 }
 .gi-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:38px;flex-wrap:wrap;gap:14px}
 .ggrid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:200px;gap:4px}
@@ -323,29 +400,7 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.55)}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(248,245,239,.1);border-radius:2px}
-@media (max-width: 900px) {
 
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 240px;
-    }
-
-    .gallery-item.wide {
-        grid-column: span 2;
-    }
-}
-
-@media (max-width: 600px) {
-
-    .gallery-grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: 280px;
-    }
-
-    .gallery-item.wide {
-        grid-column: span 1;
-    }
-}
 .owner-wrap{display:grid;grid-template-rows:auto 1fr;gap:18px}
 .owner-photo{position:relative;overflow:hidden;min-height:360px;border:1px solid rgba(248,245,239,.08);background:linear-gradient(180deg,#1A1A1A,#0B0B0B)}
 .owner-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.02) saturate(.9);opacity:.9}
@@ -561,72 +616,100 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.55)}
 
 <section id="gallery" class="gallery-section">
 
-    <div class="gallery-heading">
-        <span class="stag">OUR GALLERY</span>
-        <h2>Moments of Beauty</h2>
-        <p>Some of our work, transformations and salon experience.</p>
+   <div class="gallery-heading">
+    <span class="stag">OUR WORK</span>
+
+    <h2>Moments of Beauty</h2>
+
+    <p>
+        Some of our work, transformations and salon experience.
+    </p>
+</div>
+
+
+<div class="gallery-grid">
+
+    <div class="gallery-item">
+        <img src="hair.jpg" alt="Hair styling at Golden Touch">
+
+        <div class="gallery-overlay">
+            <span>Hair Styling</span>
+        </div>
     </div>
 
-    <div class="gallery-grid">
 
-        <div class="gallery-item large">
-            <img src="hair.jpg" alt="Hair styling at Golden Touch">
-            <div class="gallery-overlay">
-                <span>Hair Styling</span>
-            </div>
+    <div class="gallery-item">
+        <img src="makeup.jpg" alt="Makeup at Golden Touch">
+
+        <div class="gallery-overlay">
+            <span>Makeup</span>
         </div>
-
-        <div class="gallery-item">
-            <img src="makeup.jpg" alt="Makeup at Golden Touch">
-            <div class="gallery-overlay">
-                <span>Makeup</span>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <img src="makeup2.jpg" alt="Bridal makeup">
-            <div class="gallery-overlay">
-                <span>Bridal Makeup</span>
-            </div>
-        </div>
-
-        <div class="gallery-item tall">
-            <img src="makeup3.jpg" alt="Bridal styling">
-            <div class="gallery-overlay">
-                <span>Bridal Styling</span>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <img src="men.jpg" alt="Men's grooming">
-            <div class="gallery-overlay">
-                <span>Men's Grooming</span>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <img src="interior_1.jpg" alt="Golden Touch salon interior">
-            <div class="gallery-overlay">
-                <span>Our Salon</span>
-            </div>
-        </div>
-
-        <div class="gallery-item large">
-            <img src="interior_2.jpg" alt="Golden Touch salon">
-            <div class="gallery-overlay">
-                <span>Salon Experience</span>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <img src="interior_3.jpg" alt="Golden Touch salon interior">
-        </div>
-
-        <div class="gallery-item">
-            <img src="interior_4.jpg" alt="Golden Touch salon interior">
-        </div>
-
     </div>
+
+
+    <div class="gallery-item">
+        <img src="makeup2.jpg" alt="Bridal makeup">
+
+        <div class="gallery-overlay">
+            <span>Bridal Makeup</span>
+        </div>
+    </div>
+
+
+    <div class="gallery-item">
+        <img src="makeup3.jpg" alt="Bridal styling">
+
+        <div class="gallery-overlay">
+            <span>Bridal Styling</span>
+        </div>
+    </div>
+
+
+    <div class="gallery-item">
+        <img src="men.jpg" alt="Men's grooming">
+
+        <div class="gallery-overlay">
+            <span>Men's Grooming</span>
+        </div>
+    </div>
+
+
+    <div class="gallery-item">
+        <img src="interior_1.jpg" alt="Golden Touch salon interior">
+
+        <div class="gallery-overlay">
+            <span>Our Salon</span>
+        </div>
+    </div>
+
+
+    <div class="gallery-item">
+        <img src="interior_2.jpg" alt="Golden Touch salon">
+
+        <div class="gallery-overlay">
+            <span>Salon Experience</span>
+        </div>
+    </div>
+
+
+    <div class="gallery-item">
+        <img src="interior_3.jpg" alt="Golden Touch salon interior">
+
+        <div class="gallery-overlay">
+            <span>Our Space</span>
+        </div>
+    </div>
+
+
+    <div class="gallery-item">
+        <img src="interior_4.jpg" alt="Golden Touch salon interior">
+
+        <div class="gallery-overlay">
+            <span>Inside Golden Touch</span>
+        </div>
+    </div>
+
+</div>
 
 </section>
 <section id="reviews"><div class="rh"><div><div class="stag">Client Love</div><h2 class="stitle">What Our Clients Say</h2></div><div><div class="rnum">4.8</div><div class="rstars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><div class="rcnt">214 Google Reviews</div></div></div><div class="rg"><div class="rc"><div class="rst"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rt">Good behaviour good service all staff.</p><div class="rav"><div class="ravi">LK</div><div><div class="rname">Laxmi Kumari</div><div class="rmeta">Google Review</div></div></div></div><div class="rc"><div class="rst"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rt">The best place to get a haircut, makeup, facial spa and much more.</p><div class="rav"><div class="ravi">SK</div><div><div class="rname">Shahnaz Khan</div><div class="rmeta">Google Review</div></div></div></div><div class="rc"><div class="rst"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rt">I am a regular customer and my skin has improved significantly.</p><div class="rav"><div class="ravi">AA</div><div><div class="rname">Akansha Agarwal</div><div class="rmeta">Google Review</div></div></div></div></div><div class="review-cta"><div class="rcta-left"><span class="rcta-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span><h3>Loved Your Visit? Tell the World.</h3><p>Your review helps other clients discover Golden Touch and motivates our team to keep raising the bar. It takes less than a minute and means a lot to us.</p></div><a class="google-review-btn" href="https://search.google.com/local/writereview?placeid=ChIJIz2UoLEj9DkRD9uiLDdod4k" target="_blank" rel="noopener"><svg class="g-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Leave a Google Review</a></div></section>
