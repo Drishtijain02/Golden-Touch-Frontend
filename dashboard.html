@@ -1539,54 +1539,179 @@ Golden Touch Beauty Salon & Parlour`;
       }
 
       function openDetail(id) {
-        selectedId = id;
-        const a = getAppt(id);
-        if (!a) return;
-        const status = normalizeStatus(a.status);
-        const phone = String(a.phone || "").replace(/\D/g, "");
-        const apptId = getApptId(a);
-        const received = a.createdAt || a.created || a.timestamp;
-        const receivedText = received
-          ? new Date(received).toLocaleString("en-IN", {
-              day: "2-digit",
-              month: "short",
-              hour: "2-digit",
-              minute: "2-digit",
-            })
-          : "—";
-        const canConfirm = status === STATUS.PENDING;
-        const canComplete =
-          status !== STATUS.COMPLETED && status !== STATUS.CANCELLED;
-        const waMsg = encodeURIComponent(
-          "Hi " +
-            (a.name || "there") +
-            ", regarding your appointment at Golden Touch Beauty Salon &amp; Parlour.",
-        );
-        const waUrl =
-          "https://wa.me/" +
-          (phone.startsWith("91") ? phone : "91" + phone) +
-          "?text=" +
-          waMsg;
+    selectedId = id;
 
-        document.getElementById("ddetail-body").innerHTML = `
-    <span class="sp ${getStatusClass(status)}" style="margin-bottom:10px;display:inline-flex">${status}</span>
-    <div class="dd-name">${esc(a.name || "Appointment")}</div>
-    <div class="dd-row"><span class="dd-key">Phone</span><span class="dd-val"><a href="tel:${esc(a.phone || "")}" style="color:var(--cream);text-decoration:none">${esc(a.phone || "—")}</a></span></div>
-    <div class="dd-row"><span class="dd-key">Service</span><span class="dd-val">${esc(a.service || "—")}</span></div>
-    <div class="dd-row"><span class="dd-key">Date</span><span class="dd-val">${fmtDate(a.date)}</span></div>
-    <div class="dd-row"><span class="dd-key">Time</span><span class="dd-val">${fmtTime(a.time)}</span></div>
-    <div class="dd-row"><span class="dd-key">Note</span><span class="dd-val">${esc(a.msg || "—")}</span></div>
-    <div class="dd-row"><span class="dd-key">ID</span><span class="dd-val" style="font-size:.6rem;opacity:.35">${esc(apptId)}</span></div>
-    <div class="dd-row"><span class="dd-key">Received</span><span class="dd-val" style="font-size:.67rem">${receivedText}</span></div>
-    <div class="dd-actions">
-      ${canConfirm ? `<button class="dda dda-ok" onclick="confirmAppt(${JSON.stringify(String(id))})"><i class="fa-brands fa-whatsapp"></i> Confirm &amp; Send WhatsApp</button>` : ""}
-      ${canComplete ? `<button class="dda dda-dn" onclick="updateStatus(${JSON.stringify(String(id))}, 'Completed')"><i class="fa-regular fa-circle-check"></i> Mark as Completed</button>` : ""}
-      <button class="dda dda-wa" onclick="window.open(${JSON.stringify(waUrl)}, '_blank')"><i class="fa-brands fa-whatsapp"></i> Message Client</button>
-      <button class="dda dda-del" onclick="deleteAppt(${JSON.stringify(String(id))})"><i class="fa-solid fa-trash"></i> Delete</button>
-    </div>`;
-        document.getElementById("ddetail").classList.add("open");
-      }
+    const a = getAppt(id);
+    if (!a) return;
 
+    const status = normalizeStatus(a.status);
+    const phone = String(a.phone || "").replace(/\D/g, "");
+    const apptId = getApptId(a);
+
+    const received = a.createdAt || a.created || a.timestamp;
+
+    const receivedText = received
+        ? new Date(received).toLocaleString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            hour: "2-digit",
+            minute: "2-digit",
+        })
+        : "—";
+
+    const canConfirm = status === STATUS.PENDING;
+
+    const canComplete =
+        status !== STATUS.COMPLETED &&
+        status !== STATUS.CANCELLED;
+
+    const waMsg = encodeURIComponent(
+        "Hi " +
+        (a.name || "there") +
+        ", regarding your appointment at Golden Touch Beauty Salon & Parlour."
+    );
+
+    const waUrl =
+        "https://wa.me/" +
+        (phone.startsWith("91") ? phone : "91" + phone) +
+        "?text=" +
+        waMsg;
+
+    document.getElementById("ddetail-body").innerHTML = `
+        <span class="sp ${getStatusClass(status)}"
+              style="margin-bottom:10px;display:inline-flex">
+            ${status}
+        </span>
+
+        <div class="dd-name">${esc(a.name || "Appointment")}</div>
+
+        <div class="dd-row">
+            <span class="dd-key">Phone</span>
+            <span class="dd-val">
+                <a href="tel:${esc(a.phone || "")}"
+                   style="color:var(--cream);text-decoration:none">
+                    ${esc(a.phone || "—")}
+                </a>
+            </span>
+        </div>
+
+        <div class="dd-row">
+            <span class="dd-key">Service</span>
+            <span class="dd-val">${esc(a.service || "—")}</span>
+        </div>
+
+        <div class="dd-row">
+            <span class="dd-key">Date</span>
+            <span class="dd-val">${fmtDate(a.date)}</span>
+        </div>
+
+        <div class="dd-row">
+            <span class="dd-key">Time</span>
+            <span class="dd-val">${fmtTime(a.time)}</span>
+        </div>
+
+        <div class="dd-row">
+            <span class="dd-key">Note</span>
+            <span class="dd-val">${esc(a.msg || "—")}</span>
+        </div>
+
+        <div class="dd-row">
+            <span class="dd-key">ID</span>
+            <span class="dd-val" style="font-size:.6rem;opacity:.35">
+                ${esc(apptId)}
+            </span>
+        </div>
+
+        <div class="dd-row">
+            <span class="dd-key">Received</span>
+            <span class="dd-val" style="font-size:.67rem">
+                ${receivedText}
+            </span>
+        </div>
+
+        <div class="dd-actions">
+
+            ${
+                canConfirm
+                    ? `<button
+                        type="button"
+                        class="dda dda-ok"
+                        id="confirm-appt-btn">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        Confirm &amp; Send WhatsApp
+                       </button>`
+                    : ""
+            }
+
+            ${
+                canComplete
+                    ? `<button
+                        type="button"
+                        class="dda dda-dn"
+                        id="complete-appt-btn">
+                        <i class="fa-regular fa-circle-check"></i>
+                        Mark as Completed
+                       </button>`
+                    : ""
+            }
+
+            <button
+                type="button"
+                class="dda dda-wa"
+                id="message-client-btn">
+                <i class="fa-brands fa-whatsapp"></i>
+                Message Client
+            </button>
+
+            <button
+                type="button"
+                class="dda dda-del"
+                id="delete-appt-btn">
+                <i class="fa-solid fa-trash"></i>
+                Delete
+            </button>
+
+        </div>
+    `;
+
+    // Confirm
+    const confirmBtn = document.getElementById("confirm-appt-btn");
+
+    if (confirmBtn) {
+        confirmBtn.addEventListener("click", () => {
+            confirmAppt(id);
+        });
+    }
+
+    // Complete
+    const completeBtn = document.getElementById("complete-appt-btn");
+
+    if (completeBtn) {
+        completeBtn.addEventListener("click", () => {
+            updateStatus(id, STATUS.COMPLETED);
+        });
+    }
+
+    // Message client
+    const messageBtn = document.getElementById("message-client-btn");
+
+    if (messageBtn) {
+        messageBtn.addEventListener("click", () => {
+            window.open(waUrl, "_blank");
+        });
+    }
+
+    // Delete
+    const deleteBtn = document.getElementById("delete-appt-btn");
+
+    if (deleteBtn) {
+        deleteBtn.addEventListener("click", () => {
+            deleteAppt(id);
+        });
+    }
+
+    document.getElementById("ddetail").classList.add("open");
+}
       function closeDetail() {
         document.getElementById("ddetail").classList.remove("open");
         selectedId = null;
