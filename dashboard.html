@@ -1481,39 +1481,41 @@ Golden Touch Beauty Salon & Parlour`;
         showToast(`Confirmed and WhatsApp opened for ${a.name || "client"}`);
       }
       async function updateStatus(id, status) {
-        const a = getAppt(id);
+    const a = getAppt(id);
 
-        if (!a) return;
+    if (!a) return;
 
-        const prev = a.status;
-        a.status = status;
+    const prev = a.status;
+    a.status = status;
 
-        try {
-          if (usingApi) {
+    try {
+        if (usingApi) {
             await apiPatch(`/appointments/${id}`, {
-              status,
+                status,
             });
-          } else {
+        } else {
             lsSave();
-          }
-
-          renderStats();
-          renderTable();
-          updateBadge();
-
-          if (selectedId === id) {
-            openDetail(id);
-          }
-
-          showToast(`${a.name || "Appointment"} marked as ${status}`);
-        } catch (e) {
-          a.status = prev;
-
-          renderTable();
-
-          showToast("Could not update.");
         }
-      }
+
+        renderStats();
+        renderTable();
+        updateBadge();
+
+        if (selectedId === id) {
+            openDetail(id);
+        }
+
+        showToast(`${a.name || "Appointment"} marked as ${status}`);
+    } catch (e) {
+        console.error("Status update error:", e);
+
+        a.status = prev;
+
+        renderTable();
+
+        showToast("Could not update.");
+    }
+}
       async function deleteAppt(id) {
         if (!confirm("Delete this appointment?")) return;
         const prev = [...appts];
