@@ -100,7 +100,83 @@ section{padding:clamp(60px,8vw,100px) 5%}
 .otitle{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--cream);margin-bottom:9px;line-height:1.3}
 .odisc{font-size:2rem;font-weight:700;font-family:'Playfair Display',serif;color:var(--teal-m);font-style:italic;margin-bottom:9px}
 .odesc{font-size:.73rem;color:rgba(248,245,239,.36);line-height:1.7;font-weight:300}
-#gallery{background:#111111}
+.gallery-section {
+    background: #080807;
+    padding: 100px 6%;
+}
+
+.gallery-heading {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.gallery-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: #f8f5ef;
+    margin: 15px 0;
+}
+
+.gallery-heading p {
+    color: #8d8a83;
+    font-size: 1rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 260px;
+    gap: 12px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    background: #111;
+}
+
+.gallery-item.large {
+    grid-column: span 2;
+}
+
+.gallery-item.tall {
+    grid-row: span 2;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .7s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.06);
+}
+
+.gallery-overlay {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 30px 20px 20px;
+    background: linear-gradient(
+        transparent,
+        rgba(0,0,0,.8)
+    );
+    color: #f8f5ef;
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-overlay span {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+}
 .gi-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:38px;flex-wrap:wrap;gap:14px}
 .ggrid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:200px;gap:4px}
 .gi{overflow:hidden;cursor:pointer;position:relative;background:#111111}
@@ -223,7 +299,28 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.55)}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(248,245,239,.1);border-radius:2px}
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 220px;
+    }
 
+    .gallery-item.large {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item.large,
+    .gallery-item.tall {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+}
 .owner-wrap{display:grid;grid-template-rows:auto 1fr;gap:18px}
 .owner-photo{position:relative;overflow:hidden;min-height:360px;border:1px solid rgba(248,245,239,.08);background:linear-gradient(180deg,#1A1A1A,#0B0B0B)}
 .owner-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.02) saturate(.9);opacity:.9}
@@ -330,20 +427,47 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.55)}
 </nav>
 
 
-<section id="hero">
-  <div class="hbg"></div>
-  <video class="hero-img" autoplay muted loop playsinline poster="img/hero.jpg" onerror="this.style.display='none'"><source src="img/hero.mp4" type="video/mp4"/></video>
-  <div class="hoverlay"></div><div class="hpat"></div><div class="horb"></div>
-  <div class="hcontent">
-    <div class="h-eye">Since 2005 &bull; Trusted by Bokaro</div>
-    <h1 class="h-title">Golden Touch<em>Beauty Salon &amp; Parlour</em></h1>
-    <p class="h-tag">Luxury Beauty &bull; Bridal Makeup &bull; Hair &bull; Skin</p>
-    <div class="h-btns">
-      <button class="btn-p" onclick="openModal()">Book Appointment</button>
-      <button class="btn-o" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+<section class="hero">
+
+    <div class="hero-bg"></div>
+
+    <div class="hero-content">
+
+        <img 
+            src="img/logo.jpg"
+            class="hero-logo"
+            alt="Golden Touch"
+        >
+
+        <div class="hero-eyebrow">
+            SINCE 2005 • TRUSTED BY BOKARO
+        </div>
+
+        <h1>Golden Touch</h1>
+
+        <h2>Beauty Salon & Parlour</h2>
+
+        <p>
+            Luxury Beauty · Bridal Makeup · Hair · Skin
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#booking" class="btn-primary">
+                BOOK AN APPOINTMENT
+            </a>
+
+            <a href="#services" class="btn-secondary">
+                EXPLORE SERVICES
+            </a>
+        </div>
+
     </div>
-  </div>
-  <div class="scroll-hint"><span>Scroll</span><div class="sline"></div></div>
+
+    <div class="scroll-indicator">
+        SCROLL
+        <span></span>
+    </div>
+
 </section>
 
 
@@ -429,8 +553,76 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.55)}
 
 <section id="offers"><div class="stag">Exclusive Deals</div><h2 class="stitle">Current Offers</h2><div class="divln"></div><div class="og" id="offerGrid"><div class="oc" id="offersState"><div class="obadge">Loading</div><h3 class="otitle">Refreshing offers</h3><div class="odisc">Please wait</div><p class="odesc">Loading the current Golden Touch offer catalog.</p></div></div>
 
-<section id="gallery"><div class="gi-hd"><div><div class="stag">Moments &amp; Spaces</div><h2 class="stitle">Golden Touch Gallery</h2></div><p style="font-size:.72rem;color:rgba(248,245,239,.28);font-weight:300;max-width:210px;text-align:right;line-height:1.7">Placeholders prepared for images, videos and reels.</p></div><div class="ggrid"><div class="gi"><video autoplay muted loop playsinline poster="img/bridal1.jpg" onerror="this.style.display='none'"><source src="img/bridal.mp4" type="video/mp4"/></video><div class="gov"><div class="glbl">Bridal Makeup</div></div></div><div class="gi"><img src="img/hair1.jpg" alt="Hair Transformation" onerror="this.style.display='none'"/><div class="gov"><div class="glbl">Hair Transformation</div></div></div><div class="gi"><img src="img/makeup1.jpg" alt="Professional Makeup" onerror="this.style.display='none'"/><div class="gov"><div class="glbl">Professional Makeup</div></div></div><div class="gi"><img src="img/interior1.jpg" alt="Salon Interior" onerror="this.style.display='none'"/><div class="gov"><div class="glbl">Salon Interior</div></div></div><div class="gi"><img src="img/hair2.jpg" alt="Hair Colour" onerror="this.style.display='none'"/><div class="gov"><div class="glbl">Hair Colour</div></div></div><div class="gi"><video autoplay muted loop playsinline poster="img/interior2.jpg" onerror="this.style.display='none'"><source src="img/salon-tour.mp4" type="video/mp4"/></video><div class="gov"><div class="glbl">Beauty Training</div></div></div><div class="gi"><img src="img/gallery1.jpg" alt="Student Work" onerror="this.style.display='none'"/><div class="gov"><div class="glbl">Student Work</div></div></div><div class="gi"><video autoplay muted loop playsinline poster="img/gallery2.jpg" onerror="this.style.display='none'"><source src="img/transformation.mp4" type="video/mp4"/></video><div class="gov"><div class="glbl">Luxury Experience</div></div></div></div>
+<section id="gallery" class="gallery-section">
 
+    <div class="gallery-heading">
+        <span class="stag">OUR WORK</span>
+        <h2>Moments of Beauty</h2>
+        <p>Some of our work, transformations and salon experience.</p>
+    </div>
+
+    <div class="gallery-grid">
+
+        <div class="gallery-item large">
+            <img src="img/hair.jpg" alt="Hair styling at Golden Touch">
+            <div class="gallery-overlay">
+                <span>Hair Styling</span>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="img/makeup.jpg" alt="Makeup at Golden Touch">
+            <div class="gallery-overlay">
+                <span>Makeup</span>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="img/makeup-2.jpg" alt="Bridal makeup">
+            <div class="gallery-overlay">
+                <span>Bridal Makeup</span>
+            </div>
+        </div>
+
+        <div class="gallery-item tall">
+            <img src="img/makeup-3.jpg" alt="Bridal styling">
+            <div class="gallery-overlay">
+                <span>Bridal Styling</span>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="img/men.jpg" alt="Men's grooming">
+            <div class="gallery-overlay">
+                <span>Men's Grooming</span>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="img/interior-1.jpg" alt="Golden Touch salon interior">
+            <div class="gallery-overlay">
+                <span>Our Salon</span>
+            </div>
+        </div>
+
+        <div class="gallery-item large">
+            <img src="img/interior-2.jpg" alt="Golden Touch salon">
+            <div class="gallery-overlay">
+                <span>Salon Experience</span>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="img/interior-3.jpg" alt="Golden Touch salon interior">
+        </div>
+
+        <div class="gallery-item">
+            <img src="img/interior-4.jpg" alt="Golden Touch salon interior">
+        </div>
+
+    </div>
+
+</section>
 <section id="reviews"><div class="rh"><div><div class="stag">Client Love</div><h2 class="stitle">What Our Clients Say</h2></div><div><div class="rnum">4.8</div><div class="rstars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><div class="rcnt">214 Google Reviews</div></div></div><div class="rg"><div class="rc"><div class="rst"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rt">Good behaviour good service all staff.</p><div class="rav"><div class="ravi">LK</div><div><div class="rname">Laxmi Kumari</div><div class="rmeta">Google Review</div></div></div></div><div class="rc"><div class="rst"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rt">The best place to get a haircut, makeup, facial spa and much more.</p><div class="rav"><div class="ravi">SK</div><div><div class="rname">Shahnaz Khan</div><div class="rmeta">Google Review</div></div></div></div><div class="rc"><div class="rst"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rt">I am a regular customer and my skin has improved significantly.</p><div class="rav"><div class="ravi">AA</div><div><div class="rname">Akansha Agarwal</div><div class="rmeta">Google Review</div></div></div></div></div><div class="review-cta"><div class="rcta-left"><span class="rcta-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span><h3>Loved Your Visit? Tell the World.</h3><p>Your review helps other clients discover Golden Touch and motivates our team to keep raising the bar. It takes less than a minute and means a lot to us.</p></div><a class="google-review-btn" href="https://search.google.com/local/writereview?placeid=ChIJIz2UoLEj9DkRD9uiLDdod4k" target="_blank" rel="noopener"><svg class="g-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Leave a Google Review</a></div></section>
   <section id="location" style="padding:0">
   <div class="loc-g">
