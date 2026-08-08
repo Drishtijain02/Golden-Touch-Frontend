@@ -246,149 +246,368 @@ section{padding:clamp(60px,8vw,100px) 5%}
     line-height: 1.7;
 }
 
+/* =====================================================
+   PREMIUM GALLERY
+===================================================== */
+
+.premium-gallery {
+    background: #080807;
+    padding: 110px 5% 100px;
+    overflow: hidden;
+}
+
 
 /* =========================
-   GALLERY GRID
-   ========================= */
+   HEADING
+========================= */
 
-.gallery-grid {
+.gallery-heading {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 55px;
+}
+
+.gallery-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1;
+    color: #f8f5ef;
+    margin: 15px 0;
+}
+
+.gallery-heading p {
+    color: rgba(248,245,239,.45);
+    font-size: .9rem;
+    letter-spacing: .5px;
+}
+
+
+/* =========================
+   CAROUSEL
+========================= */
+
+.gallery-carousel {
+    position: relative;
+
     width: 100%;
-    max-width: 1350px;
+    max-width: 1250px;
+
+    height: 570px;
+
     margin: 0 auto;
 
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
-/* Every image has exactly the same tile size */
+/* =========================
+   TRACK
+========================= */
 
-.gallery-item {
+.gallery-track {
     position: relative;
-    overflow: hidden;
-    background: #111;
-    aspect-ratio: 4 / 3;
-}
 
-
-/* Image */
-
-.gallery-item img {
     width: 100%;
     height: 100%;
-    display: block;
-    object-fit: cover;
-    object-position: center;
 
-    transition: transform 0.7s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
-/* Subtle zoom */
+/* =========================
+   CARD
+========================= */
 
-.gallery-item:hover img {
-    transform: scale(1.05);
-}
-
-
-/* Dark gradient */
-
-.gallery-item::after {
-    content: "";
+.gallery-card {
     position: absolute;
+
+    width: 290px;
+    height: 420px;
+
+    overflow: hidden;
+
+    border-radius: 14px;
+
+    background: #111;
+
+    border: 1px solid rgba(248,245,239,.12);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.5);
+
+    cursor: grab;
+
+    user-select: none;
+
+    transition:
+        transform .6s cubic-bezier(.22,.61,.36,1),
+        opacity .6s ease,
+        filter .6s ease,
+        box-shadow .6s ease;
+}
+
+.gallery-card:active {
+    cursor: grabbing;
+}
+
+
+/* IMAGE */
+
+.gallery-card img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    pointer-events: none;
+
+    transition: transform .8s ease;
+}
+
+.gallery-card:hover img {
+    transform: scale(1.04);
+}
+
+
+/* =========================
+   DARK GRADIENT
+========================= */
+
+.gallery-card::after {
+    content: "";
+
+    position: absolute;
+
     inset: 0;
 
-    background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.75),
-        rgba(0, 0, 0, 0.05) 55%,
-        transparent
-    );
-
-    opacity: 0;
-    transition: opacity 0.35s ease;
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,.92) 0%,
+            rgba(0,0,0,.35) 40%,
+            transparent 72%
+        );
 
     pointer-events: none;
 }
 
 
-/* Overlay */
+/* =========================
+   TEXT
+========================= */
 
-.gallery-overlay {
+.gallery-card-overlay {
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
 
-    padding: 24px;
+    left: 24px;
+    right: 24px;
+    bottom: 25px;
+
+    z-index: 2;
+
+    color: #f8f5ef;
+}
+
+.gallery-card-overlay span {
+    display: block;
+
+    color: #d4af37;
+
+    font-size: .55rem;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 8px;
+}
+
+.gallery-card-overlay h3 {
+    margin: 0;
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 1.5rem;
+
+    font-weight: 400;
+}
+
+
+/* =========================
+   ACTIVE CARD
+========================= */
+
+.gallery-card.active {
+
+    box-shadow:
+        0 35px 90px rgba(0,0,0,.7),
+        0 0 0 1px rgba(212,175,55,.28);
+
+}
+
+
+/* =========================
+   ARROWS
+========================= */
+
+.gallery-arrow {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(248,245,239,.22);
+
+    background: rgba(8,8,7,.75);
+
+    backdrop-filter: blur(12px);
 
     color: #f8f5ef;
 
-    opacity: 0;
-    transform: translateY(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 100;
 
     transition:
-        opacity 0.35s ease,
-        transform 0.35s ease;
-
-    z-index: 2;
+        background .3s ease,
+        color .3s ease,
+        border-color .3s ease,
+        transform .3s ease;
 }
 
-.gallery-item:hover::after {
-    opacity: 1;
+.gallery-arrow:hover {
+
+    background: #d4af37;
+
+    border-color: #d4af37;
+
+    color: #080807;
+
+    transform:
+        translateY(-50%)
+        scale(1.08);
+
 }
 
-.gallery-item:hover .gallery-overlay {
-    opacity: 1;
-    transform: translateY(0);
+.gallery-prev {
+    left: 20px;
 }
 
-.gallery-overlay span {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    letter-spacing: 0.3px;
+.gallery-next {
+    right: 20px;
 }
 
 
 /* =========================
+   DRAG HINT
+========================= */
+
+.gallery-hint {
+    text-align: center;
+
+    margin-top: 5px;
+
+    color: rgba(248,245,239,.25);
+
+    font-size: .55rem;
+
+    letter-spacing: 4px;
+}
+
+
+/* =====================================================
    TABLET
-   ========================= */
+===================================================== */
 
 @media (max-width: 900px) {
 
-    .gallery-section {
-        padding: 80px 5%;
+    .gallery-card {
+        width: 260px;
+        height: 390px;
     }
 
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .gallery-carousel {
+        height: 520px;
     }
+
+    .gallery-arrow {
+        width: 44px;
+        height: 44px;
+    }
+
 }
 
 
-/* =========================
+/* =====================================================
    MOBILE
-   ========================= */
+===================================================== */
 
 @media (max-width: 600px) {
 
-    .gallery-section {
-        padding: 70px 20px;
+    .premium-gallery {
+        padding: 80px 15px;
     }
 
-    .gallery-heading {
-        margin-bottom: 40px;
+    .gallery-carousel {
+        height: 470px;
     }
 
-    .gallery-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
+    .gallery-card {
+        width: 225px;
+        height: 340px;
     }
 
-    .gallery-item {
-        aspect-ratio: 4 / 3;
+    .gallery-prev {
+        left: 2px;
     }
+
+    .gallery-next {
+        right: 2px;
+    }
+
+    .gallery-card-overlay {
+        left: 18px;
+        right: 18px;
+        bottom: 20px;
+    }
+
+    .gallery-card-overlay h3 {
+        font-size: 1.25rem;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 420px) {
+
+    .gallery-card {
+        width: 205px;
+        height: 310px;
+    }
+
+    .gallery-carousel {
+        height: 430px;
+    }
+
+}
 }
 .gi-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:38px;flex-wrap:wrap;gap:14px}
 .ggrid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:200px;gap:4px}
@@ -742,102 +961,162 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.55)}
 
 <section id="offers"><div class="stag">Exclusive Deals</div><h2 class="stitle">Current Offers</h2><div class="divln"></div><div class="og" id="offerGrid"><div class="oc" id="offersState"><div class="obadge">Loading</div><h3 class="otitle">Refreshing offers</h3><div class="odisc">Please wait</div><p class="odesc">Loading the current Golden Touch offer catalog.</p></div></div>
 
-<section id="gallery" class="gallery-section">
+<section id="gallery" class="premium-gallery">
 
-   <div class="gallery-heading">
-    <span class="stag">OUR WORK</span>
+    <div class="gallery-heading">
+        <span class="stag">OUR WORK</span>
 
-    <h2>Moments of Beauty</h2>
+        <h2>Moments of Beauty</h2>
 
-    <p>
-        Some of our work, transformations and salon experience.
-    </p>
-</div>
-
-
-<div class="gallery-grid">
-
-    <div class="gallery-item">
-        <img src="hair.jpg" alt="Hair styling at Golden Touch">
-
-        <div class="gallery-overlay">
-            <span>Hair Styling</span>
-        </div>
+        <p>
+            Explore our transformations, bridal looks and salon experience.
+        </p>
     </div>
 
 
-    <div class="gallery-item">
-        <img src="makeup.jpg" alt="Makeup at Golden Touch">
+    <div class="gallery-carousel">
 
-        <div class="gallery-overlay">
-            <span>Makeup</span>
+        <div class="gallery-track">
+
+            <!-- 1 -->
+            <div class="gallery-card">
+                <img src="award-1.jpg" alt="Golden Touch Award">
+                <div class="gallery-card-overlay">
+                    <span>GOLDEN TOUCH</span>
+                    <h3>Our Achievement</h3>
+                </div>
+            </div>
+
+
+            <!-- 2 -->
+            <div class="gallery-card">
+                <img src="hair.jpg" alt="Hair Styling">
+                <div class="gallery-card-overlay">
+                    <span>HAIR</span>
+                    <h3>Hair Styling</h3>
+                </div>
+            </div>
+
+
+            <!-- 3 -->
+            <div class="gallery-card">
+                <img src="makeup.jpg" alt="Bridal Makeup">
+                <div class="gallery-card-overlay">
+                    <span>BRIDAL</span>
+                    <h3>Bridal Makeup</h3>
+                </div>
+            </div>
+
+
+            <!-- 4 -->
+            <div class="gallery-card">
+                <img src="makeup2.jpg" alt="Bridal Makeup">
+                <div class="gallery-card-overlay">
+                    <span>BRIDAL</span>
+                    <h3>Bridal Look</h3>
+                </div>
+            </div>
+
+
+            <!-- 5 -->
+            <div class="gallery-card">
+                <img src="makeup3.jpg" alt="Makeup Styling">
+                <div class="gallery-card-overlay">
+                    <span>MAKEUP</span>
+                    <h3>Makeup Artistry</h3>
+                </div>
+            </div>
+
+
+            <!-- 6 -->
+            <div class="gallery-card">
+                <img src="men.jpg" alt="Men's Grooming">
+                <div class="gallery-card-overlay">
+                    <span>GROOMING</span>
+                    <h3>Men's Grooming</h3>
+                </div>
+            </div>
+
+
+            <!-- 7 -->
+            <div class="gallery-card">
+                <img src="interior_1.jpg" alt="Golden Touch Salon Interior">
+                <div class="gallery-card-overlay">
+                    <span>OUR SALON</span>
+                    <h3>Salon Interior</h3>
+                </div>
+            </div>
+
+
+            <!-- 8 -->
+            <div class="gallery-card">
+                <img src="interior_2.jpg" alt="Golden Touch Salon">
+                <div class="gallery-card-overlay">
+                    <span>OUR SALON</span>
+                    <h3>Salon Experience</h3>
+                </div>
+            </div>
+
+
+            <!-- 9 -->
+            <div class="gallery-card">
+                <img src="interior_3.jpg" alt="Golden Touch Salon">
+                <div class="gallery-card-overlay">
+                    <span>OUR SALON</span>
+                    <h3>Beauty Space</h3>
+                </div>
+            </div>
+
+
+            <!-- 10 -->
+            <div class="gallery-card">
+                <img src="interior_4.jpg" alt="Golden Touch Salon">
+                <div class="gallery-card-overlay">
+                    <span>OUR SALON</span>
+                    <h3>Salon Experience</h3>
+                </div>
+            </div>
+
+
+            <!-- 11 -->
+            <div class="gallery-card">
+                <img src="interior_5.jpg" alt="Golden Touch Products">
+                <div class="gallery-card-overlay">
+                    <span>BEAUTY</span>
+                    <h3>Our Products</h3>
+                </div>
+            </div>
+
         </div>
+
+
+        <!-- LEFT ARROW -->
+
+        <button
+            class="gallery-arrow gallery-prev"
+            type="button"
+            aria-label="Previous image"
+        >
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+
+        <!-- RIGHT ARROW -->
+
+        <button
+            class="gallery-arrow gallery-next"
+            type="button"
+            aria-label="Next image"
+        >
+            <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
     </div>
 
 
-    <div class="gallery-item">
-        <img src="makeup2.jpg" alt="Bridal makeup">
-
-        <div class="gallery-overlay">
-            <span>Bridal Makeup</span>
-        </div>
+    <div class="gallery-hint">
+        <span>DRAG TO EXPLORE</span>
     </div>
-
-
-    <div class="gallery-item">
-        <img src="makeup3.jpg" alt="Bridal styling">
-
-        <div class="gallery-overlay">
-            <span>Bridal Styling</span>
-        </div>
-    </div>
-
-
-    <div class="gallery-item">
-        <img src="men.jpg" alt="Men's grooming">
-
-        <div class="gallery-overlay">
-            <span>Men's Grooming</span>
-        </div>
-    </div>
-
-
-    <div class="gallery-item">
-        <img src="interior_1.jpg" alt="Golden Touch salon interior">
-
-        <div class="gallery-overlay">
-            <span>Our Salon</span>
-        </div>
-    </div>
-
-
-    <div class="gallery-item">
-        <img src="interior_2.jpg" alt="Golden Touch salon">
-
-        <div class="gallery-overlay">
-            <span>Salon Experience</span>
-        </div>
-    </div>
-
-
-    <div class="gallery-item">
-        <img src="interior_3.jpg" alt="Golden Touch salon interior">
-
-        <div class="gallery-overlay">
-            <span>Our Space</span>
-        </div>
-    </div>
-
-
-    <div class="gallery-item">
-        <img src="interior_4.jpg" alt="Golden Touch salon interior">
-
-        <div class="gallery-overlay">
-            <span>Inside Golden Touch</span>
-        </div>
-    </div>
-
-</div>
 
 </section>
 <section id="reviews"><div class="rh"><div><div class="stag">Client Love</div><h2 class="stitle">What Our Clients Say</h2></div><div><div class="rnum">4.8</div><div class="rstars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><div class="rcnt">214 Google Reviews</div></div></div><div class="rg"><div class="rc"><div class="rst"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rt">Good behaviour good service all staff.</p><div class="rav"><div class="ravi">LK</div><div><div class="rname">Laxmi Kumari</div><div class="rmeta">Google Review</div></div></div></div><div class="rc"><div class="rst"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rt">The best place to get a haircut, makeup, facial spa and much more.</p><div class="rav"><div class="ravi">SK</div><div><div class="rname">Shahnaz Khan</div><div class="rmeta">Google Review</div></div></div></div><div class="rc"><div class="rst"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rt">I am a regular customer and my skin has improved significantly.</p><div class="rav"><div class="ravi">AA</div><div><div class="rname">Akansha Agarwal</div><div class="rmeta">Google Review</div></div></div></div></div><div class="review-cta"><div class="rcta-left"><span class="rcta-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span><h3>Loved Your Visit? Tell the World.</h3><p>Your review helps other clients discover Golden Touch and motivates our team to keep raising the bar. It takes less than a minute and means a lot to us.</p></div><a class="google-review-btn" href="https://search.google.com/local/writereview?placeid=ChIJIz2UoLEj9DkRD9uiLDdod4k" target="_blank" rel="noopener"><svg class="g-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Leave a Google Review</a></div></section>
@@ -1338,6 +1617,287 @@ hero.addEventListener("mousemove", (e) => {
 hero.addEventListener("mouseleave", () => {
     orb.style.transform = "translate(-50%, -50%)";
 });
+</script>
+    <script>
+
+const galleryCards =
+    document.querySelectorAll(".gallery-card");
+
+const galleryCarousel =
+    document.querySelector(".gallery-carousel");
+
+const galleryNextButton =
+    document.querySelector(".gallery-next");
+
+const galleryPrevButton =
+    document.querySelector(".gallery-prev");
+
+
+let galleryIndex = 0;
+
+let galleryStartX = 0;
+
+let galleryDragging = false;
+
+
+/* =========================================
+   UPDATE CAROUSEL
+========================================= */
+
+function updateGallery() {
+
+    const total = galleryCards.length;
+
+
+    galleryCards.forEach((card, index) => {
+
+        let offset = index - galleryIndex;
+
+
+        /* Make carousel circular */
+
+        if (offset > total / 2) {
+            offset -= total;
+        }
+
+        if (offset < -total / 2) {
+            offset += total;
+        }
+
+
+        /* Position */
+
+        const x =
+            offset * 190;
+
+
+        const y =
+            Math.abs(offset) * 25;
+
+
+        const rotation =
+            offset * 8;
+
+
+        const scale =
+            1 - Math.abs(offset) * .10;
+
+
+        /* Hide cards far away */
+
+        let opacity = 1;
+
+        if (Math.abs(offset) > 2) {
+            opacity = 0;
+        }
+
+        else if (Math.abs(offset) === 2) {
+            opacity = .35;
+        }
+
+        else if (Math.abs(offset) === 1) {
+            opacity = .75;
+        }
+
+
+        /* Depth */
+
+        const zIndex =
+            100 - Math.abs(offset);
+
+
+        /* Apply */
+
+        card.style.transform =
+            `translateX(${x}px)
+             translateY(${y}px)
+             rotate(${rotation}deg)
+             scale(${scale})`;
+
+
+        card.style.opacity =
+            opacity;
+
+
+        card.style.zIndex =
+            zIndex;
+
+
+        /* Side cards darker */
+
+        card.style.filter =
+            offset === 0
+                ? "brightness(1)"
+                : "brightness(.55)";
+
+
+        /* Active card */
+
+        card.classList.toggle(
+            "active",
+            offset === 0
+        );
+
+    });
+
+}
+
+
+/* =========================================
+   NEXT
+========================================= */
+
+function galleryNext() {
+
+    galleryIndex++;
+
+    if (
+        galleryIndex >=
+        galleryCards.length
+    ) {
+
+        galleryIndex = 0;
+
+    }
+
+    updateGallery();
+
+}
+
+
+/* =========================================
+   PREVIOUS
+========================================= */
+
+function galleryPrevious() {
+
+    galleryIndex--;
+
+    if (galleryIndex < 0) {
+
+        galleryIndex =
+            galleryCards.length - 1;
+
+    }
+
+    updateGallery();
+
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+galleryNextButton.addEventListener(
+    "click",
+    galleryNext
+);
+
+
+galleryPrevButton.addEventListener(
+    "click",
+    galleryPrevious
+);
+
+
+/* =========================================
+   DRAG
+========================================= */
+
+galleryCarousel.addEventListener(
+    "pointerdown",
+    function(event) {
+
+        galleryDragging = true;
+
+        galleryStartX =
+            event.clientX;
+
+        galleryCarousel.setPointerCapture(
+            event.pointerId
+        );
+
+    }
+);
+
+
+galleryCarousel.addEventListener(
+    "pointerup",
+    function(event) {
+
+        if (!galleryDragging)
+            return;
+
+
+        galleryDragging = false;
+
+
+        const distance =
+            event.clientX -
+            galleryStartX;
+
+
+        if (Math.abs(distance) > 60) {
+
+            if (distance < 0) {
+
+                galleryNext();
+
+            }
+
+            else {
+
+                galleryPrevious();
+
+            }
+
+        }
+
+    }
+);
+
+
+galleryCarousel.addEventListener(
+    "pointercancel",
+    function() {
+
+        galleryDragging = false;
+
+    }
+);
+
+
+/* =========================================
+   KEYBOARD
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "ArrowRight") {
+
+            galleryNext();
+
+        }
+
+        if (event.key === "ArrowLeft") {
+
+            galleryPrevious();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+updateGallery();
+
 </script>
 </body>
 </html>
