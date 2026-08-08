@@ -37,15 +37,103 @@ nav.sc{background:rgba(6,6,6,.93);backdrop-filter:blur(18px);padding:13px 5%;bor
 .mob-menu a{font-size:1.1rem;letter-spacing:4px;text-transform:uppercase;color:rgba(248,245,239,.7);text-decoration:none;font-family:'Playfair Display',serif}
 .mob-close{position:absolute;top:24px;right:24px;background:none;border:none;color:var(--cream);font-size:1.5rem;cursor:pointer}
 #hero{height:100vh;min-height:560px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:0 5%}
-.hbg{position:absolute;inset:0;background:radial-gradient(circle at 50% 38%,rgba(212,175,55,.14) 0%,rgba(212,175,55,.06) 18%,rgba(11,11,11,.96) 48%,#0B0B0B 100%)}
+.hbg {
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(212,175,55,.16) 0%,
+            rgba(212,175,55,.07) 20%,
+            rgba(11,11,11,.94) 48%,
+            #0B0B0B 100%
+        );
+
+    animation: goldenBreath 8s ease-in-out infinite;
+}
+
+@keyframes goldenBreath {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.04);
+        opacity: .92;
+    }
+}
 .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.18;filter:saturate(.85) contrast(1.02)}
 .hoverlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,11,11,.1) 0%,rgba(11,11,11,.42) 58%,rgba(0,0,0,.9) 100%)}
 .hpat{position:absolute;inset:0;opacity:.03;background-image:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(248,245,239,.5) 40px,rgba(248,245,239,.5) 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(248,245,239,.5) 40px,rgba(248,245,239,.5) 41px)}
-.horb{position:absolute;width:min(600px,100vw);height:min(600px,100vw);border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.14) 0%,rgba(212,175,55,.06) 24%,transparent 72%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.horb {
+    position: absolute;
+    width: min(600px, 100vw);
+    height: min(600px, 100vw);
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(212,175,55,.16) 0%,
+        rgba(212,175,55,.07) 25%,
+        transparent 70%
+    );
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: transform 0.25s ease-out;
+    filter: blur(2px);
+}
+
 .hcontent{position:relative;text-align:center;animation:heroIn 1.2s 1.8s ease both;max-width:900px;width:100%;z-index:2}
-@keyframes heroIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.hero-logo {
+    position: absolute;
+    top: 28px;
+    left: 50px;
+    z-index: 5;
+    width: 150px;
+}
+
+.hero-logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+@keyframes heroIn {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+        filter: blur(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
 .h-eye{font-size:.6rem;letter-spacing:5px;text-transform:uppercase;color:rgba(248,245,239,.4);margin-bottom:18px}
-.h-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,9vw,7rem);line-height:1;font-weight:700;color:var(--cream);letter-spacing:4px}
+.h-title {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(3rem,9vw,7rem);
+    line-height:1;
+    font-weight:700;
+    color:var(--cream);
+    letter-spacing:4px;
+    animation: titleFloat 6s ease-in-out infinite;
+}
+
+@keyframes titleFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
 .h-title em{display:block;font-style:italic;font-weight:400;font-size:.52em;letter-spacing:7px;color:rgba(248,245,239,.5);margin-top:8px}
 .h-tag{font-size:clamp(.75rem,1.6vw,.95rem);letter-spacing:3px;color:rgba(248,245,239,.45);margin:20px 0 44px;font-weight:300}
 .h-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
@@ -533,27 +621,45 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.55)}
 
 <section id="hero">
 
-  <div class="hbg"></div>
+    <div class="hbg"></div>
+    <div class="hero-img"></div>
+    <div class="hoverlay"></div>
+    <div class="hpat"></div>
+    <div class="horb"></div>
 
-  <video class="hero-img" autoplay muted loop playsinline poster="logo.jpg" onerror="this.style.display='none'"><source src="img/hero.mp4" type="video/mp4"/></video>
+    <!-- LOGO GOES HERE -->
+    <div class="hero-logo">
+        <img src="/img/logo.png" alt="Golden Touch">
+    </div>
 
-  <div class="hoverlay"></div><div class="hpat"></div><div class="horb"></div>
+    <div class="hcontent">
 
-  <div class="hcontent">
+        <div class="h-eye">
+            Since 2005 &bull; Trusted by Bokaro
+        </div>
 
-    <div class="h-eye">Since 2005 &bull; Trusted by Bokaro</div>
+        <h1 class="h-title">
+            Golden Touch
+            <em>Beauty Salon &amp; Parlour</em>
+        </h1>
 
-    <h1 class="h-title">Golden Touch<em>Beauty Salon &amp; Parlour</em></h1>
+        <p class="h-tag">
+            Luxury Beauty &bull; Bridal Makeup &bull; Hair &bull; Skin
+        </p>
 
-    <p class="h-tag">Luxury Beauty &bull; Bridal Makeup &bull; Hair &bull; Skin</p>
+        <div class="h-btns">
+            <button class="btn-p" onclick="openModal()">
+                Book Appointment
+            </button>
 
-    <div class="h-btns">
+            <button class="btn-o"
+                onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+                Explore Services
+            </button>
+        </div>
 
-      <button class="btn-p" onclick="openModal()">Book Appointment</button>
+    </div>
 
-      <button class="btn-o" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button></div>
-
-  <div class="scroll-hint"><span>Scroll</span><div class="sline"></div></div>
 </section>
 
 <section id="about">
@@ -1213,6 +1319,27 @@ appts = lsLoad();
 usingApi = true;
 loadServices();
 loadOffers();
+</script>
+<script>
+const hero = document.getElementById("hero");
+const orb = document.querySelector(".horb");
+
+hero.addEventListener("mousemove", (e) => {
+    const rect = hero.getBoundingClientRect();
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const moveX = (x / rect.width - 0.5) * 80;
+    const moveY = (y / rect.height - 0.5) * 80;
+
+    orb.style.transform =
+        `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+});
+
+hero.addEventListener("mouseleave", () => {
+    orb.style.transform = "translate(-50%, -50%)";
+});
 </script>
 </body>
 </html>
