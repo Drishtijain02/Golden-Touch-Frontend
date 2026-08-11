@@ -2038,6 +2038,90 @@ document.addEventListener(
 ========================================= */
 
 updateGallery();
+/* ================================
+   OWNER / FOUNDER SECTION
+   ================================ */
+
+#owner .owner-wrap {
+    display: grid;
+    grid-template-columns: 0.75fr 1.8fr;
+    grid-template-areas:
+        "photo photo"
+        "stats story";
+    gap: 0;
+    align-items: stretch;
+}
+
+/* Founder image */
+#owner .owner-photo {
+    grid-area: photo;
+    width: 100%;
+}
+
+/* Statistics */
+#owner .av {
+    grid-area: stats;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 45px 25px;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Founder story */
+#owner .at {
+    grid-area: story;
+
+    padding: 55px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Statistics spacing */
+#owner .astat {
+    text-align: center;
+    width: 100%;
+    padding: 20px 0;
+}
+
+#owner .adiv {
+    width: 1px;
+    height: 30px;
+    background: rgba(255,255,255,0.12);
+}
+
+/* Founder heading */
+#owner .stitle {
+    margin-bottom: 18px;
+}
+
+/* Founder paragraphs */
+#owner .at p {
+    line-height: 1.8;
+    margin-bottom: 18px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    #owner .owner-wrap {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #owner .av {
+        width: 100%;
+    }
+
+    #owner .at {
+        padding: 40px 25px;
+    }
+
+}
 
 </script>
 </body>
