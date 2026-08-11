@@ -814,24 +814,50 @@ section#owner > div.ag {
     letter-spacing: 1px;
     opacity: 0.45;
 }
-    /* OWNER SECTION ONLY */
-#owner > .ag {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: clamp(36px, 6vw, 80px) !important;
-    align-items: stretch !important;
+/* =========================================
+   OWNER SECTION - SAFE, ISOLATED LAYOUT
+   ========================================= */
+
+#owner .owner-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(36px, 6vw, 80px);
+    align-items: center;
 }
 
-#owner > .ag > .owner-wrap {
-    grid-column: 1;
-    grid-row: 1;
+#owner .owner-left {
+    min-width: 0;
 }
 
-#owner > .ag > .at {
-    grid-column: 2;
-    grid-row: 1;
-    align-self: center;
+#owner .owner-about {
+    min-width: 0;
 }
+
+#owner .owner-wrap {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 18px;
+}
+
+/* Keep the founder image intact */
+#owner .owner-photo {
+    position: relative;
+    overflow: hidden;
+    min-height: 360px;
+}
+
+/* Keep statistics intact */
+#owner .av {
+    width: 100%;
+}
+
+/* Mobile only */
+@media (max-width: 900px) {
+    #owner .owner-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -936,103 +962,100 @@ section#owner > div.ag {
 </section>
 
 <section id="owner">
-  <div class="ag">
 
-    <div class="owner-wrap">
+  <div class="owner-layout">
 
-      <!-- Founder Image -->
-      <div class="owner-photo">
-        <img
-          src="Owner.jpg"
-          alt="Dipanwita Kumar"
-          onerror="this.style.display='none'"
-        />
+    <!-- LEFT SIDE: FOUNDER IMAGE + STATISTICS -->
+    <div class="owner-left">
 
-        <div class="owner-overlay">
-          <span class="owner-kicker">Founder &amp; Beauty Expert</span>
-          <strong>Dipanwita Kumar</strong>
-          <span>20+ Years of Experience</span>
-        </div>
-      </div>
+      <div class="owner-wrap">
 
+        <div class="owner-photo">
+          <img src="img/owner.jpg"
+               alt="Dipanwita Kumar"
+               onerror="this.style.display='none'"/>
 
-      <!-- Founder Statistics -->
-      <div class="av">
-
-        <div class="astat">
-          <div class="n">20+</div>
-          <div class="l">Years of Excellence</div>
+          <div class="owner-overlay">
+            <span class="owner-kicker">Founder &amp; Beauty Expert</span>
+            <strong>Dipanwita Kumar</strong>
+            <span>20+ Years of Experience</span>
+          </div>
         </div>
 
-        <div class="adiv"></div>
+        <div class="av">
 
-        <div class="astat">
-          <div class="n">5000+</div>
-          <div class="l">Happy Clients</div>
+          <div class="astat">
+            <div class="n">20+</div>
+            <div class="l">Years of Excellence</div>
+          </div>
+
+          <div class="adiv"></div>
+
+          <div class="astat">
+            <div class="n">5000+</div>
+            <div class="l">Happy Clients</div>
+          </div>
+
+          <div class="adiv"></div>
+
+          <div class="astat">
+            <div class="n">214+</div>
+            <div class="l">Google Reviews</div>
+          </div>
+
+          <div class="adiv"></div>
+
+          <div class="astat">
+            <div class="n">4.8&#9733;</div>
+            <div class="l">Google Rating</div>
+          </div>
+
         </div>
-
-        <div class="adiv"></div>
-
-        <div class="astat">
-          <div class="n">214+</div>
-          <div class="l">Google Reviews</div>
-        </div>
-
-        <div class="adiv"></div>
-
-        <div class="astat">
-          <div class="n">4.8★</div>
-          <div class="l">Google Rating</div>
-        </div>
-
-      </div>
-
-
-      <!-- Founder Story -->
-      <div class="at">
-
-        <div class="stag">The Woman Behind Golden Touch</div>
-
-        <h2 class="stitle">
-          Meet Dipanwita Kumar
-        </h2>
-
-        <div class="divln"></div>
-
-        <p>
-          With over two decades of experience in the beauty industry,
-          <strong>Dipanwita Kumar</strong> has built Golden Touch with a
-          passion for beauty, creativity and making every client feel
-          their absolute best.
-        </p>
-
-        <p>
-          A Professional Makeup Artist, Beauty Educator, Certified Trainer
-          and Beauty Expert, she believes that beauty is not simply about
-          looking beautiful — it is about feeling confident, comfortable
-          and truly yourself.
-        </p>
-
-        <p>
-          Her journey has been shaped by years of experience, continuous
-          learning and a genuine love for her craft. Along the way, she has
-          received multiple awards and has had the privilege of helping
-          aspiring beauty professionals learn, grow and build their own
-          careers.
-        </p>
-
-        <p>
-          Today, that same passion lives at the heart of Golden Touch —
-          creating a welcoming space where every client receives
-          thoughtful attention, professional expertise and a touch of
-          something special.
-        </p>
 
       </div>
 
     </div>
 
+
+    <!-- RIGHT SIDE: ABOUT FOUNDER -->
+    <div class="owner-about">
+
+      <div class="stag">The Woman Behind Golden Touch</div>
+
+      <h2 class="stitle">Meet Dipanwita Kumar</h2>
+
+      <div class="divln"></div>
+
+      <p>
+        With over two decades of experience in the beauty industry,
+        Dipanwita Kumar has built Golden Touch with a passion for beauty,
+        creativity and making every client feel their absolute best.
+      </p>
+
+      <p>
+        A Professional Makeup Artist, Beauty Educator, Certified Trainer
+        and Beauty Expert, she believes that beauty is not simply about
+        looking beautiful — it is about feeling confident, comfortable
+        and truly yourself.
+      </p>
+
+      <p>
+        Her journey has been shaped by years of experience, continuous
+        learning and a genuine love for her craft. Along the way, she has
+        received multiple awards and has had the privilege of helping
+        aspiring beauty professionals learn, grow and build their own careers.
+      </p>
+
+      <p>
+        Today, that same passion lives at the heart of Golden Touch —
+        creating a welcoming space where every client receives thoughtful
+        attention, professional expertise and a touch of something special.
+      </p>
+
+    </div>
+
   </div>
+
 </section>
 
 <section id="services">
