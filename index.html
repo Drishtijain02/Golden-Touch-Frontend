@@ -814,6 +814,24 @@ section#owner > div.ag {
     letter-spacing: 1px;
     opacity: 0.45;
 }
+    /* OWNER SECTION ONLY */
+#owner > .ag {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: clamp(36px, 6vw, 80px) !important;
+    align-items: stretch !important;
+}
+
+#owner > .ag > .owner-wrap {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+#owner > .ag > .at {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+}
 </style>
 </head>
 <body>
