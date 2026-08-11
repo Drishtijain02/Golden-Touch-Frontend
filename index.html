@@ -742,6 +742,76 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.55)}
 .simg{width:100%;height:170px;object-fit:cover;display:block;margin-bottom:18px;border:1px solid rgba(248,245,239,.06);background:#111}
 .gi img,.gi video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
 @media(max-width:900px){.owner-wrap{grid-template-columns:1fr}}
+/* ===== FOUNDER SECTION LAYOUT FIX ===== */
+
+@media (min-width: 901px) {
+
+    .owner-wrap {
+        display: grid !important;
+        grid-template-columns: 0.75fr 1.8fr !important;
+        grid-template-rows: auto auto !important;
+        grid-template-areas:
+            "photo photo"
+            "stats story";
+        gap: 18px !important;
+    }
+
+    .owner-photo {
+        grid-area: photo;
+    }
+
+    .av {
+        grid-area: stats;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .at {
+        grid-area: story;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        padding: 45px;
+    }
+
+    .astat {
+        width: 100%;
+        text-align: center;
+        padding: 18px 0;
+    }
+
+    .adiv {
+        width: 1px;
+        height: 28px;
+        background: rgba(248, 245, 239, 0.12);
+    }
+}
+
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 900px) {
+
+    .owner-wrap {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 18px;
+    }
+
+    .av {
+        width: 100%;
+    }
+
+    .at {
+        padding: 30px 20px;
+    }
+
+}
 
 .service-card{padding:clamp(22px,3vw,36px) clamp(18px,2.5vw,28px)}
 .service-card .sci{position:relative;z-index:1;display:flex;flex-direction:column}
