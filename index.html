@@ -803,49 +803,16 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.55)}
     font-style:normal;
     font-weight:300;
 }
-/* =========================================
-   OWNER / FOUNDER SECTION
-   ========================================= */
-
-#owner > .ag {
-    display: grid;
-    grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
-    gap: clamp(36px, 6vw, 80px);
-    align-items: start;
+/* ONLY OWNER SECTION LAYOUT */
+section#owner > div.ag {
+    grid-template-columns: 1fr 1fr;
 }
-
-/* LEFT SIDE:
-   Founder image
-   ↓
-   Statistics
-*/
-#owner .owner-wrap {
-    display: grid;
-    grid-template-rows: auto auto;
-    gap: 18px;
-}
-
-/* RIGHT SIDE: Founder story */
-#owner .owner-wrap + .at {
-    align-self: center;
-}
-
-/* Mobile */
-@media (max-width: 900px) {
-
-    #owner > .ag {
-        grid-template-columns: 1fr;
-        gap: 36px;
-    }
-
-    #owner .owner-wrap {
-        grid-template-rows: auto auto;
-    }
-
-    #owner .owner-wrap + .at {
-        align-self: start;
-    }
-
+    .developer-credit {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    opacity: 0.45;
 }
 </style>
 </head>
