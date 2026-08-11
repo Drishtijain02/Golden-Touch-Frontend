@@ -2032,50 +2032,7 @@ document.addEventListener(
 ========================================= */
 
 updateGallery();
-/* =========================================
-   OWNER / FOUNDER SECTION
-   ========================================= */
 
-#owner > .ag {
-    display: grid;
-    grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
-    gap: clamp(36px, 6vw, 80px);
-    align-items: start;
-}
-
-/* LEFT SIDE:
-   Founder image
-   ↓
-   Statistics
-*/
-#owner .owner-wrap {
-    display: grid;
-    grid-template-rows: auto auto;
-    gap: 18px;
-}
-
-/* RIGHT SIDE: Founder story */
-#owner .owner-wrap + .at {
-    align-self: center;
-}
-
-/* Mobile */
-@media (max-width: 900px) {
-
-    #owner > .ag {
-        grid-template-columns: 1fr;
-        gap: 36px;
-    }
-
-    #owner .owner-wrap {
-        grid-template-rows: auto auto;
-    }
-
-    #owner .owner-wrap + .at {
-        align-self: start;
-    }
-
-}
 
 </script>
 </body>
