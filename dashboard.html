@@ -1274,36 +1274,55 @@
         toastTimer = setTimeout(() => t.classList.remove("show"), 3200);
       }
 
-      async function apiGet(path) {
-        const res = await fetch(API_BASE + path);
-        if (!res.ok) throw new Error("Request failed");
-        return res.json();
-      }
+      
+function getAuthHeaders() {
+  const token = localStorage.getItem("ownerToken");
 
-      async function apiPatch(path, payload) {
-        const res = await fetch(API_BASE + path, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        if (!res.ok) throw new Error("Request failed");
-        return res.json();
-      }
+  return {
+    "Authorization": `Bearer ${token}`,
+    "Content-Type": "application/json"
+  };
+}
 
-      async function apiDelete(path) {
-        const res = await fetch(API_BASE + path, { method: "DELETE" });
-        if (!res.ok) throw new Error("Request failed");
-        return res.json();
-      }
+async function apiGet(path) {
+  const res = await fetch(API_BASE + path, {
+    headers: getAuthHeaders()
+  });
 
-      async function checkApi() {
-        try {
-          const res = await fetch(API_BASE + "/health");
-          usingApi = res.ok;
-        } catch (e) {
-          usingApi = false;
-        }
-      }
+  if (!res.ok) {
+    throw new Error(`Request failed: ${res.status}`);
+  }
+
+  return res.json();
+}
+
+async function apiPatch(path, payload) {
+  const res = await fetch(API_BASE + path, {
+    method: "PUT",
+    headers: getAuthHeaders(),
+    body: JSON.stringify(payload)
+  });
+
+  if (!res.ok) {
+    throw new Error(`Request failed: ${res.status}`);
+  }
+
+  return res.json();
+}
+
+async function apiDelete(path) {
+  const res = await fetch(API_BASE + path, {
+    method: "DELETE",
+    headers: getAuthHeaders()
+  });
+
+  if (!res.ok) {
+    throw new Error(`Request failed: ${res.status}`);
+  }
+
+  return res.json();
+}
+
 
       function lsLoad() {
         try {
@@ -2283,6 +2302,7 @@ Golden Touch Beauty Salon & Parlour`;
       function doLogout() {
         // Remove all login information
         localStorage.removeItem("ownerAuth");
+        localStorage.removeItem("ownerToken");
         localStorage.removeItem("ownerName");
         localStorage.removeItem("ownerEmail");
 
