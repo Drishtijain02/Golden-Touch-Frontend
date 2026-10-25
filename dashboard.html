@@ -1322,6 +1322,14 @@ async function apiDelete(path) {
 
   return res.json();
 }
+       async function checkApi() {
+        try {
+          const res = await fetch(API_BASE + "/health");
+          usingApi = res.ok;
+        } catch (e) {
+          usingApi = false;
+        }
+      }
 
 
       function lsLoad() {
