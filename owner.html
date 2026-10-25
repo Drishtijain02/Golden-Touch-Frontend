@@ -89,10 +89,12 @@ body{font-family:'Poppins',sans-serif;background:#0B0B0B;color:var(--cream);min-
 const API_BASE = "https://golden-touch-backend.onrender.com/api";
 
 // Redirect if already logged in
-if (localStorage.getItem("ownerAuth") === "true") {
+if (
+    localStorage.getItem("ownerAuth") === "true" &&
+    localStorage.getItem("ownerToken")
+) {
     window.location.href = "dashboard.html";
 }
-
 async function login() {
 
     const email = document.getElementById("email").value.trim();
@@ -131,14 +133,15 @@ async function login() {
             return;
 
         }
-
-        localStorage.setItem("ownerAuth", "true");
-
-        localStorage.setItem("ownerName", data.user.full_name);
-
-        localStorage.setItem("ownerEmail", data.user.email);
-
-        window.location.href = "dashboard.html";
+      if (!data.session || !data.session.access_token) {
+        alert("Login succeeded, but no session token was returned.");
+        return;
+      }
+      localStorage.setItem("ownerAuth", "true");
+      localStorage.setItem("ownerToken", data.session.access_token);
+      localStorage.setItem("ownerName", data.user.full_name);
+      localStorage.setItem("ownerEmail", email);
+      window.location.href = "dashboard.html";
 
     }
 
